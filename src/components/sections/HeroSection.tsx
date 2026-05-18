@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
 
-export function SiteHero() {
+export function HeroSection() {
   return (
     <section className="relative h-svh w-full overflow-hidden">
       <Image

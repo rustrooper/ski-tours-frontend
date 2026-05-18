@@ -1,14 +1,16 @@
-import { SiteGallery } from '@/components/site/site-gallery';
-import { SiteHeader } from '@/components/site/site-header';
-import { SiteHero } from '@/components/site/site-hero';
+import { HeaderSection } from '@/components/sections/HeaderSection';
+import { HeroSection } from '@/components/sections/HeroSection';
+import { PhotosSection } from '@/components/sections/PhotosSection';
+import { ToursSection } from '@/components/sections/ToursSection';
 
 export default function Home() {
   return (
     <>
-      <SiteHeader />
+      <HeaderSection />
       <main className="flex-1">
-        <SiteHero />
-        <SiteGallery />
+        <HeroSection />
+        <PhotosSection />
+        <ToursSection />
       </main>
     </>
   );

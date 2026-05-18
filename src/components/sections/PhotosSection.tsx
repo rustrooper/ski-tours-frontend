@@ -17,7 +17,7 @@ const photos = [
   { src: '/placeholder_hero.jpg', title: 'Домбай', caption: 'Кавказские пейзажи' },
 ];
 
-export function SiteGallery() {
+export function PhotosSection() {
   return (
     <section id="gallery" className="py-20 sm:py-28">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -33,7 +33,7 @@ export function SiteGallery() {
             {photos.map((photo) => (
               <CarouselItem key={photo.title} className="sm:basis-1/2 lg:basis-1/3">
                 <figure className="border-border bg-card overflow-hidden rounded-xl border shadow-sm">
-                  <div className="relative aspect-[4/3] w-full">
+                  <div className="relative aspect-4/3 w-full">
                     <Image
                       src={photo.src}
                       alt={photo.title}

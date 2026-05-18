@@ -9,7 +9,7 @@ const navLinks = [
   { href: '#instructors', label: 'Наши инструкторы' },
 ];
 
-export function SiteHeader() {
+export function HeaderSection() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-md supports-[backdrop-filter]:bg-black/20">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
