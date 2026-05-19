@@ -11,6 +11,7 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import Image from 'next/image';
+import WheelGesturesPlugin from 'embla-carousel-wheel-gestures';
 
 export interface ToursSectionItem {
   id: string;
@@ -135,6 +136,7 @@ function ToursSection({
               },
             },
           }}
+          plugins={[WheelGesturesPlugin()]}
         >
           <CarouselContent className="ml-0 2xl:mr-[max(0rem,calc(50vw-700px))] 2xl:ml-[max(8rem,calc(50vw-700px))]">
             {items.map((item) => (
