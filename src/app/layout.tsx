@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, Manrope, JetBrains_Mono } from 'next/font/google';
+
+import { FooterSection } from '@/components/layout/FooterSection';
+import { HeaderSection } from '@/components/layout/HeaderSection';
+
 import './globals.css';
 
 const spaceGrotesk = Space_Grotesk({
@@ -39,7 +43,11 @@ export default function RootLayout({
       lang="ru"
       className={`${spaceGrotesk.variable} ${manrope.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <HeaderSection />
+        <main className="flex-1">{children}</main>
+        <FooterSection />
+      </body>
     </html>
   );
 }
