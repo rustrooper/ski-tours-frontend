@@ -1,0 +1,5 @@
+{
+  "permissions": {
+    "allow": ["mcp__shadcn__list_items_in_registries"]
+  }
+}

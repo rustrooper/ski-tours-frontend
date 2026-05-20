@@ -1,7 +1,10 @@
+import { AboutSection } from '@/components/sections/AboutSection';
+import { CTASection } from '@/components/sections/CTASection';
+import { DestinationsSection } from '@/components/sections/DestinationsSection';
+import { FooterSection } from '@/components/sections/FooterSection';
 import { HeaderSection } from '@/components/sections/HeaderSection';
 import { HeroSection } from '@/components/sections/HeroSection';
-import { PhotosSection } from '@/components/sections/PhotosSection';
-import { ToursSection } from '@/components/sections/ToursSection';
+import { ReviewsSection } from '@/components/sections/ReviewsSection';
 
 export default function Home() {
   return (
@@ -9,9 +12,12 @@ export default function Home() {
       <HeaderSection />
       <main className="flex-1">
         <HeroSection />
-        <PhotosSection />
-        <ToursSection />
+        <DestinationsSection />
+        <AboutSection />
+        <ReviewsSection />
+        <CTASection />
       </main>
+      <FooterSection />
     </>
   );
 }
