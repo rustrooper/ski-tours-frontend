@@ -25,7 +25,7 @@ export function Photo({
   children,
 }: Props) {
   return (
-    <div className={`photo ${className}`} style={style}>
+    <figure className={`photo ${className}`} style={style}>
       <Image
         src={src}
         alt=""
@@ -48,8 +48,8 @@ export function Photo({
       )}
       <div className="grain" />
       <div className="vignette" />
-      {label && <div className="photo-label">{label}</div>}
+      {label && <figcaption className="photo-label">{label}</figcaption>}
       {children}
-    </div>
+    </figure>
   );
 }

@@ -1,15 +1,25 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
 import { Icon } from '@/components/brand/Icon';
 import { Photo } from '@/components/brand/Photo';
 import { Button } from '@/components/ui/button';
+import {
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel';
 import { Separator } from '@/components/ui/separator';
 
-const THUMBS = [
-  '/img/kirovsk.png',
-  '/img/sheregesh.png',
-  '/img/dombay.png',
-  '/img/kirovsk.png',
-  '/img/sheregesh.png',
-  '/img/dombay.png',
+const SLIDES = [
+  { src: '/img/kirovsk.png', label: "PHOTO · TEAM TRIP — KIROVSK '24" },
+  { src: '/img/sheregesh.png', label: "PHOTO · TEAM TRIP — KAMCHATKA '25" },
+  { src: '/img/dombay.png', label: "PHOTO · TEAM TRIP — DOMBAY '25" },
+  { src: '/img/kirovsk.png', label: "PHOTO · TEAM TRIP — KOLA '24" },
+  { src: '/img/sheregesh.png', label: "PHOTO · TEAM TRIP — SHEREGESH '25" },
+  { src: '/img/dombay.png', label: "PHOTO · TEAM TRIP — ARKHYZ '25" },
 ] as const;
 
 const STATS = [
@@ -19,6 +29,33 @@ const STATS = [
 ] as const;
 
 export function AboutSection() {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const sync = () => {
+      setCurrent(api.selectedScrollSnap());
+      setCanPrev(api.canScrollPrev());
+      setCanNext(api.canScrollNext());
+    };
+
+    sync();
+    api.on('select', sync);
+    api.on('reInit', sync);
+
+    return () => {
+      api.off('select', sync);
+      api.off('reInit', sync);
+    };
+  }, [api]);
+
+  const total = SLIDES.length;
+  const badge = `${String(current + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+
   return (
     <section id="about" className="bg-bg-0 px-5 py-20 md:px-16 md:py-35">
       <div className="mx-auto grid w-full max-w-360 grid-cols-1 items-start gap-12 md:grid-cols-[1fr_1.05fr] md:gap-24">
@@ -64,40 +101,66 @@ export function AboutSection() {
         </div>
 
         <div>
-          <div className="relative aspect-4/5 overflow-hidden rounded-lg">
-            <Photo
-              src="/img/kirovsk.png"
-              label="PHOTO · TEAM TRIP — KAMCHATKA '25"
-              style={{ position: 'absolute', inset: 0 }}
-            />
+          <Carousel className="relative" setApi={setApi} opts={{ align: 'start' }}>
+            <CarouselContent className="ml-0">
+              {SLIDES.map((s, i) => (
+                <CarouselItem
+                  key={`slide-${i}`}
+                  className="relative aspect-4/5 overflow-hidden rounded-lg pl-0"
+                >
+                  <Photo src={s.src} label={s.label} style={{ position: 'absolute', inset: 0 }} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
             <div className="absolute right-6 bottom-6 z-4 flex gap-2">
-              <Button variant="ghost-pill" size="icon-pill" aria-label="Назад">
+              <Button
+                variant="ghost-pill"
+                size="icon-pill"
+                aria-label="Назад"
+                onClick={() => api?.scrollPrev()}
+                disabled={!canPrev}
+              >
                 <Icon.chevL />
               </Button>
-              <Button variant="ghost-pill" size="icon-pill" aria-label="Вперёд">
+              <Button
+                variant="ghost-pill"
+                size="icon-pill"
+                aria-label="Вперёд"
+                onClick={() => api?.scrollNext()}
+                disabled={!canNext}
+              >
                 <Icon.chevR />
               </Button>
             </div>
             <div className="border-hairline bg-overlay-soft text-fg-0 absolute top-6 left-6 z-4 rounded-full border px-3 py-1.5 font-mono text-[12px] tracking-[0.08em]">
-              02 / 06
+              {badge}
             </div>
-          </div>
+          </Carousel>
 
           <div className="mt-3 grid grid-cols-6 gap-2">
-            {THUMBS.map((src, i) => (
-              <div
-                key={`thumb-${i}`}
-                className="relative aspect-square cursor-pointer overflow-hidden rounded-sm transition-opacity"
-                style={{
-                  outline:
-                    i === 1 ? '2px solid var(--color-ice)' : '1px solid var(--color-hairline)',
-                  outlineOffset: i === 1 ? -2 : -1,
-                  opacity: i === 1 ? 1 : 0.55,
-                }}
-              >
-                <Photo src={src} style={{ position: 'absolute', inset: 0 }} />
-              </div>
-            ))}
+            {SLIDES.map((s, i) => {
+              const active = i === current;
+              return (
+                <button
+                  key={`thumb-${i}`}
+                  type="button"
+                  aria-label={`Слайд ${i + 1}`}
+                  aria-current={active ? 'true' : undefined}
+                  onClick={() => api?.scrollTo(i)}
+                  className="relative aspect-square cursor-pointer overflow-hidden rounded-sm border-0 bg-transparent p-0 transition-opacity"
+                  style={{
+                    outline: active
+                      ? '2px solid var(--color-ice)'
+                      : '1px solid var(--color-hairline)',
+                    outlineOffset: active ? -2 : -1,
+                    opacity: active ? 1 : 0.55,
+                  }}
+                >
+                  <Photo src={s.src} style={{ position: 'absolute', inset: 0 }} />
+                </button>
+              );
+            })}
           </div>
 
           <div className="mt-10 grid grid-cols-3">
