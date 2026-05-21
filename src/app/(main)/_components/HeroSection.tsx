@@ -13,7 +13,12 @@ export function HeroSection() {
   return (
     <section className="relative overflow-hidden">
       <div className="relative h-svh min-h-160 md:h-230">
-        <Photo kind="hero" heroLight style={{ position: 'absolute', inset: 0 }} />
+        <Photo
+          src="/img/sheregesh.png"
+          heroLight
+          preload
+          style={{ position: 'absolute', inset: 0 }}
+        />
         <div
           className="absolute inset-0 z-2"
           style={{

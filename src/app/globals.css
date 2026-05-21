@@ -24,6 +24,9 @@
   --color-hairline: oklch(1 0 0 / 0.08);
   --color-hairline-strong: oklch(1 0 0 / 0.14);
 
+  /* Scrims — semi-transparent black overlays for text-on-photo chips */
+  --color-overlay-soft: oklch(0 0 0 / 0.4);
+
   /* Shadcn semantic aliases — point them at the new palette */
   --color-background: var(--color-bg-1);
   --color-foreground: var(--color-fg-0);
@@ -68,6 +71,7 @@
 
   html {
     background: var(--color-bg-1);
+    scroll-behavior: smooth;
   }
 
   body {
@@ -223,7 +227,6 @@
     color: var(--color-fg-0);
   }
 
-  /* Photo placeholder (ridge background) */
   .photo {
     position: relative;
     overflow: hidden;
@@ -242,13 +245,6 @@
     background:
       radial-gradient(120% 70% at 50% -10%, oklch(0.78 0.06 215 / 0.18), transparent 55%),
       radial-gradient(80% 60% at 80% 20%, oklch(0.95 0.02 215 / 0.1), transparent 55%);
-    z-index: 1;
-    pointer-events: none;
-  }
-  .photo .ridge {
-    position: absolute;
-    left: -5%;
-    right: -5%;
     z-index: 1;
     pointer-events: none;
   }

@@ -1,11 +1,9 @@
-import type { RidgeKind } from '@/components/brand/Photo';
 import { Icon } from '@/components/brand/Icon';
 import { Photo } from '@/components/brand/Photo';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 type Destination = {
-  kind: RidgeKind;
   name: string;
   region: string;
   tag: string;
@@ -17,7 +15,6 @@ type Destination = {
 
 const DESTINATIONS: Destination[] = [
   {
-    kind: 'sheregesh',
     name: 'Шерегеш',
     region: 'Кемеровская область',
     tag: 'Powder · Resort',
@@ -27,7 +24,6 @@ const DESTINATIONS: Destination[] = [
     stats: ['Декабрь — Май', 'до 4 м снега', '15 трасс'],
   },
   {
-    kind: 'hibiny',
     name: 'Кировск',
     region: 'Хибины, Мурманская обл.',
     tag: 'Freeride · Arctic',
@@ -37,7 +33,6 @@ const DESTINATIONS: Destination[] = [
     stats: ['Январь — Июнь', '67° с.ш.', 'хели-ски опция'],
   },
   {
-    kind: 'dombay',
     name: 'Домбай',
     region: 'Кавказ, Карачаево-Черкесия',
     tag: 'Classic · Panorama',
@@ -71,9 +66,9 @@ export function DestinationsSection() {
           {DESTINATIONS.map((d, i) => (
             <article key={d.name} className="dest-card h-110 md:h-145">
               <Photo
-                kind={d.kind}
                 src={d.src}
                 objectPosition={d.pos}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 style={{ position: 'absolute', inset: 0 }}
               />
               <div className="scrim" />

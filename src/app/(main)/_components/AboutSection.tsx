@@ -3,7 +3,14 @@ import { Photo } from '@/components/brand/Photo';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
-const THUMBS = ['hibiny', 'about1', 'sheregesh', 'about2', 'dombay', 'hero'] as const;
+const THUMBS = [
+  '/img/kirovsk.png',
+  '/img/sheregesh.png',
+  '/img/dombay.png',
+  '/img/kirovsk.png',
+  '/img/sheregesh.png',
+  '/img/dombay.png',
+] as const;
 
 const STATS = [
   ['7', 'лет в горах'],
@@ -57,9 +64,9 @@ export function AboutSection() {
         </div>
 
         <div>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+          <div className="relative aspect-4/5 overflow-hidden rounded-lg">
             <Photo
-              kind="about1"
+              src="/img/kirovsk.png"
               label="PHOTO · TEAM TRIP — KAMCHATKA '25"
               style={{ position: 'absolute', inset: 0 }}
             />
@@ -71,18 +78,15 @@ export function AboutSection() {
                 <Icon.chevR />
               </Button>
             </div>
-            <div
-              className="border-hairline text-fg-0 absolute top-6 left-6 z-4 rounded-full border px-3 py-1.5 font-mono text-[12px] tracking-[0.08em]"
-              style={{ background: 'oklch(0 0 0 / 0.4)' }}
-            >
+            <div className="border-hairline bg-overlay-soft text-fg-0 absolute top-6 left-6 z-4 rounded-full border px-3 py-1.5 font-mono text-[12px] tracking-[0.08em]">
               02 / 06
             </div>
           </div>
 
           <div className="mt-3 grid grid-cols-6 gap-2">
-            {THUMBS.map((k, i) => (
+            {THUMBS.map((src, i) => (
               <div
-                key={`${k}-${i}`}
+                key={`thumb-${i}`}
                 className="relative aspect-square cursor-pointer overflow-hidden rounded-sm transition-opacity"
                 style={{
                   outline:
@@ -91,7 +95,7 @@ export function AboutSection() {
                   opacity: i === 1 ? 1 : 0.55,
                 }}
               >
-                <Photo kind={k} style={{ position: 'absolute', inset: 0 }} />
+                <Photo src={src} style={{ position: 'absolute', inset: 0 }} />
               </div>
             ))}
           </div>

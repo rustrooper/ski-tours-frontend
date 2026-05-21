@@ -9,7 +9,7 @@ export function CTASection() {
   return (
     <section id="cta" className="relative overflow-hidden">
       <div className="relative min-h-155 py-24 md:h-155 md:py-0">
-        <Photo kind="cta" style={{ position: 'absolute', inset: 0 }} />
+        <Photo src="/img/dombay.png" style={{ position: 'absolute', inset: 0 }} />
         <div
           className="absolute inset-0"
           style={{
