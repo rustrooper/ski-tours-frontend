@@ -1,11 +1,33 @@
 'use client';
 
+import { useState } from 'react';
+
 import { Icon } from '@/components/brand/Icon';
 import { Photo } from '@/components/brand/Photo';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { formatPhone, isValidPhone } from '@/lib/phone';
 
 export function CTASection() {
+  const [phone, setPhone] = useState('');
+  const [touched, setTouched] = useState(false);
+  const [submitAttempted, setSubmitAttempted] = useState(false);
+
+  const isValid = isValidPhone(phone);
+  const showError = !isValid && (submitAttempted || (touched && phone !== ''));
+  const errorId = 'cta-phone-error';
+
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (!isValid) {
+      setSubmitAttempted(true);
+      return;
+    }
+    setPhone('');
+    setTouched(false);
+    setSubmitAttempted(false);
+  };
+
   return (
     <section id="cta" className="relative overflow-hidden">
       <div className="relative min-h-155 py-24 md:h-155 md:py-0">
@@ -26,7 +48,8 @@ export function CTASection() {
 
           <form
             className="mt-9 flex w-full max-w-140 flex-col gap-3 md:flex-row md:gap-3"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
+            noValidate
           >
             <Input
               variant="pill"
@@ -36,12 +59,27 @@ export function CTASection() {
               placeholder="+7 ___ ___ __ __"
               aria-label="Телефон"
               className="flex-1"
+              value={phone}
+              onChange={(e) => setPhone(formatPhone(e.target.value))}
+              onBlur={() => setTouched(true)}
+              aria-invalid={showError || undefined}
+              aria-describedby={showError ? errorId : undefined}
             />
             <Button type="submit" variant="ice" size="pill-lg" className="px-8">
               Подобрать
               <Icon.arrowRight />
             </Button>
           </form>
+
+          {showError && (
+            <p
+              id={errorId}
+              role="alert"
+              className="text-destructive mt-3 max-w-140 self-start text-left text-[13px] md:self-auto"
+            >
+              Введите телефон полностью в формате +7 (xxx) xxx-xx-xx.
+            </p>
+          )}
 
           <div className="text-fg-2 mt-5 flex items-start justify-center gap-2">
             <span className="mt-0.5">

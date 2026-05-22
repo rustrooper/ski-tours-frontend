@@ -21,9 +21,9 @@ export function LogoMark({
         />
         <circle cx="9" cy="6" r="1.3" fill={accent} />
       </svg>
-      <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: 0 }}>
-        <span style={{ fontWeight: 600 }}>sanek</span>
-        <span style={{ fontWeight: 300, opacity: 0.7, marginLeft: 4 }}>tours</span>
+      <span className="inline-flex items-baseline">
+        <span className="font-semibold">sanek</span>
+        <span className="ml-1 font-light opacity-70">tours</span>
       </span>
     </span>
   );
