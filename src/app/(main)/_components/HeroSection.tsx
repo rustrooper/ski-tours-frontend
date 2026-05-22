@@ -15,6 +15,7 @@ export function HeroSection() {
       <div className="relative h-svh min-h-160 md:h-230">
         <Photo
           src="/img/sheregesh.png"
+          alt=""
           heroLight
           preload
           style={{ position: 'absolute', inset: 0 }}

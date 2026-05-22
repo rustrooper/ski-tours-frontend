@@ -3,7 +3,7 @@ import type { CSSProperties, ReactNode } from 'react';
 
 type Props = {
   src: string;
-  label?: string;
+  alt: string;
   className?: string;
   style?: CSSProperties;
   heroLight?: boolean;
@@ -15,7 +15,7 @@ type Props = {
 
 export function Photo({
   src,
-  label,
+  alt,
   className = '',
   style,
   heroLight = false,
@@ -25,10 +25,10 @@ export function Photo({
   children,
 }: Props) {
   return (
-    <figure className={`photo ${className}`} style={style}>
+    <div className={`photo ${className}`} style={style}>
       <Image
         src={src}
-        alt=""
+        alt={alt}
         fill
         sizes={sizes}
         preload={preload}
@@ -48,8 +48,7 @@ export function Photo({
       )}
       <div className="grain" />
       <div className="vignette" />
-      {label && <figcaption className="photo-label">{label}</figcaption>}
       {children}
-    </figure>
+    </div>
   );
 }

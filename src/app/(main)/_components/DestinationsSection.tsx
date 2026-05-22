@@ -67,6 +67,7 @@ export function DestinationsSection() {
             <article key={d.name} className="dest-card h-110 md:h-145">
               <Photo
                 src={d.src}
+                alt=""
                 objectPosition={d.pos}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 style={{ position: 'absolute', inset: 0 }}

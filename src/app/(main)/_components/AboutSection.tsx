@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Fade from 'embla-carousel-fade';
 
 import { Icon } from '@/components/brand/Icon';
 import { Photo } from '@/components/brand/Photo';
@@ -101,14 +102,22 @@ export function AboutSection() {
         </div>
 
         <div>
-          <Carousel className="relative" setApi={setApi} opts={{ align: 'start' }}>
+          <Carousel
+            className="relative"
+            setApi={setApi}
+            opts={{ align: 'start', duration: 30 }}
+            plugins={[Fade()]}
+          >
             <CarouselContent className="ml-0">
               {SLIDES.map((s, i) => (
                 <CarouselItem
                   key={`slide-${i}`}
                   className="relative aspect-4/5 overflow-hidden rounded-lg pl-0"
                 >
-                  <Photo src={s.src} label={s.label} style={{ position: 'absolute', inset: 0 }} />
+                  <figure className="absolute inset-0 m-0">
+                    <Photo src={s.src} alt={s.label} style={{ position: 'absolute', inset: 0 }} />
+                    <figcaption className="photo-label">{s.label}</figcaption>
+                  </figure>
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -157,7 +166,7 @@ export function AboutSection() {
                     opacity: active ? 1 : 0.55,
                   }}
                 >
-                  <Photo src={s.src} style={{ position: 'absolute', inset: 0 }} />
+                  <Photo src={s.src} alt="" style={{ position: 'absolute', inset: 0 }} />
                 </button>
               );
             })}

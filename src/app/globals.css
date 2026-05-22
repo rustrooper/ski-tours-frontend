@@ -270,7 +270,7 @@
     pointer-events: none;
     background: radial-gradient(120% 90% at 50% 40%, transparent 55%, oklch(0 0 0 / 0.55) 100%);
   }
-  .photo .photo-label {
+  .photo-label {
     position: absolute;
     left: 14px;
     bottom: 12px;
