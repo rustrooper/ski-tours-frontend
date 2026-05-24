@@ -44,21 +44,21 @@ const REVIEWS: Review[] = [
   },
   {
     name: 'Саня К.',
-    initials: 'НВ',
-    dest: 'Домбай · Март 25',
-    text: 'Бюджет был небольшой, но получили максимум. Канатка, склоны, виды — всё, как обещали. Отдельно — местный шашлык и баня после катания. Ребята реально знают курорт изнутри, а не по картинкам с сайта.',
+    initials: 'СК',
+    dest: 'Шерегеш · Март 25',
+    text: 'Третий раз еду с ребятами — это уже традиция. В этот раз взял жену, она никогда не стояла на лыжах. За неделю Sanek нашли ей инструктора, поменяли маршрут группы. В итоге она спустилась самостоятельно. Уровень заботы нечеловеческий.',
   },
   {
     name: 'Витя Е.',
-    initials: 'НВ',
-    dest: 'Домбай · Март 25',
-    text: 'Бюджет был небольшой, но получили максимум. Канатка, склоны, виды — всё, как обещали. Отдельно — местный шашлык и баня после катания. Ребята реально знают курорт изнутри, а не по картинкам с сайта.',
+    initials: 'ВЕ',
+    dest: 'Кировск · Февраль 25',
+    text: 'Хотел хели-ски, не был уверен в уровне. Гид честно сказал: пока рано, подготовься ещё сезон. Это меня и зацепило — никакого продажного давления, просто честность. На следующий сезон — точно хели.',
   },
   {
     name: 'Илья И.',
-    initials: 'НВ',
-    dest: 'Домбай · Март 25',
-    text: 'Бюджет был небольшой, но получили максимум. Канатка, склоны, виды — всё, как обещали. Отдельно — местный шашлык и баня после катания. Ребята реально знают курорт изнутри, а не по картинкам с сайта.',
+    initials: 'ИИ',
+    dest: 'Домбай · Январь 25',
+    text: 'Брал тур последним из группы — оставалось одно место. Менеджер за сутки закрыл перелёт, трансфер и заселение. Кавказ с нуля за 24 часа — не верил, пока не оказался на склоне.',
   },
 ];
 
@@ -73,14 +73,23 @@ export function ReviewsSection() {
     if (!api) return;
 
     const sync = () => setCurrent(api.selectedScrollSnap());
-
     sync();
     api.on('select', sync);
     api.on('reInit', sync);
 
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const applyMotion = () => {
+      const ap = api.plugins().autoplay as { stop?: () => void; play?: () => void } | undefined;
+      if (mq.matches) ap?.stop?.();
+      else ap?.play?.();
+    };
+    applyMotion();
+    mq.addEventListener('change', applyMotion);
+
     return () => {
       api.off('select', sync);
       api.off('reInit', sync);
+      mq.removeEventListener('change', applyMotion);
     };
   }, [api]);
 
@@ -131,8 +140,11 @@ export function ReviewsSection() {
               <CarouselItem key={r.name} className="basis-full pl-5 md:basis-1/3">
                 <Card className="border-hairline bg-bg-2 min-h-90 gap-6 rounded-lg p-8 ring-0">
                   <CardHeader className="flex flex-row items-center justify-between gap-2 p-0">
-                    <span className="font-display text-ice text-[80px] leading-[0.6] font-semibold opacity-40">
-                      {'“'}
+                    <span
+                      className="font-display text-ice text-[80px] leading-[0.6] font-semibold opacity-40"
+                      aria-hidden="true"
+                    >
+                      {'«'}
                     </span>
                     <Badge variant="chip">{r.dest}</Badge>
                   </CardHeader>
@@ -152,7 +164,9 @@ export function ReviewsSection() {
                       </Avatar>
                       <div>
                         <div className="text-fg-0 text-sm font-semibold">{r.name}</div>
-                        <div className="text-fg-2 text-[13px]">★★★★★</div>
+                        <div className="text-fg-2 text-[13px]" aria-label="5 из 5 звёзд">
+                          ★★★★★
+                        </div>
                       </div>
                     </div>
                   </CardFooter>

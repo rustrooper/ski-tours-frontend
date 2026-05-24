@@ -215,6 +215,11 @@
     width: 20px;
     background: var(--color-ice);
   }
+  .dots button.d:focus-visible {
+    outline: 2px solid var(--color-ice);
+    outline-offset: 3px;
+    border-radius: 99px;
+  }
 
   /* Logo mark inline layout */
   .logo-mark {
@@ -287,7 +292,7 @@
     backdrop-filter: blur(4px);
   }
 
-  /* Destination card — full-bleed photo card with hover-reveal */
+  /* Destination card — full-bleed photo card with hover/focus reveal */
   .dest-card {
     position: relative;
     border-radius: var(--radius-lg);
@@ -333,8 +338,24 @@
       opacity 0.35s ease 0.05s,
       transform 0.35s ease 0.05s;
   }
-  .dest-card:hover .reveal {
+  .dest-card:hover .reveal,
+  .dest-card:focus-within .reveal {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dest-card .photo {
+    transition: none;
+  }
+  .dest-card .reveal {
+    transition: none;
+  }
+  .dots .d {
+    transition: none;
+  }
+  .scroll-cue::after {
+    box-shadow: none;
   }
 }

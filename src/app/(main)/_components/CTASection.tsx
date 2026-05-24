@@ -8,25 +8,36 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { formatPhone, isValidPhone } from '@/lib/phone';
 
+type FormStatus = 'idle' | 'submitting' | 'success';
+
 export function CTASection() {
   const [phone, setPhone] = useState('');
   const [touched, setTouched] = useState(false);
   const [submitAttempted, setSubmitAttempted] = useState(false);
+  const [status, setStatus] = useState<FormStatus>('idle');
 
   const isValid = isValidPhone(phone);
   const showError = !isValid && (submitAttempted || (touched && phone !== ''));
   const errorId = 'cta-phone-error';
+  const busy = status === 'submitting';
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isValid) {
       setSubmitAttempted(true);
       return;
     }
-    setPhone('');
-    setTouched(false);
-    setSubmitAttempted(false);
+    if (busy) return;
+    setStatus('submitting');
+    setTimeout(() => {
+      setStatus('success');
+      setPhone('');
+      setTouched(false);
+      setSubmitAttempted(false);
+    }, 700);
   };
+
+  const handleReset = () => setStatus('idle');
 
   return (
     <section id="cta" className="relative overflow-hidden">
@@ -46,71 +57,85 @@ export function CTASection() {
             Оставьте номер телефона — менеджер расскажет подробнее о предстоящем путешествии.
           </p>
 
-          <form
-            className="mt-9 flex w-full max-w-140 flex-col gap-3 md:flex-row md:gap-3"
-            onSubmit={handleSubmit}
-            noValidate
-          >
-            <Input
-              variant="pill"
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
-              placeholder="+7 ___ ___ __ __"
-              aria-label="Телефон"
-              className="flex-1"
-              value={phone}
-              onChange={(e) => setPhone(formatPhone(e.target.value))}
-              onBlur={() => setTouched(true)}
-              aria-invalid={showError || undefined}
-              aria-describedby={showError ? errorId : undefined}
-            />
-            <Button type="submit" variant="ice" size="pill-lg" className="px-8">
-              Подобрать
-              <Icon.arrowRight />
-            </Button>
-          </form>
-
-          {showError && (
-            <p
-              id={errorId}
-              role="alert"
-              className="text-destructive mt-3 max-w-140 self-start text-left text-[13px] md:self-auto"
-            >
-              Введите телефон полностью в формате +7 (xxx) xxx-xx-xx.
-            </p>
-          )}
-
-          <div className="text-fg-2 mt-5 flex items-start justify-center gap-2">
-            <span className="mt-0.5">
-              <Icon.shield />
-            </span>
-            <span className="text-fg-2 max-w-105 text-left text-[13px]">
-              Нажимая «Подобрать», вы соглашаетесь с{' '}
-              <a
-                href="#"
-                className="text-fg-1 underline"
-                style={{ textDecorationColor: 'var(--color-hairline-strong)' }}
+          {status === 'success' ? (
+            <div className="mt-9 flex w-full max-w-140 flex-col items-center gap-5">
+              <p className="text-fg-1 text-[17px] leading-snug">
+                Заявка принята. Менеджер свяжется с вами в ближайшее время.
+              </p>
+              <Button variant="ghost-pill" size="pill" onClick={handleReset}>
+                Отправить ещё одну заявку
+              </Button>
+            </div>
+          ) : (
+            <>
+              <form
+                className="mt-9 flex w-full max-w-140 flex-col gap-3 md:flex-row md:gap-3"
+                onSubmit={handleSubmit}
+                noValidate
               >
-                политикой обработки персональных данных
-              </a>
-              .
-            </span>
-          </div>
+                <Input
+                  variant="pill"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  placeholder="+7 ___ ___ __ __"
+                  aria-label="Телефон"
+                  className="flex-1"
+                  value={phone}
+                  onChange={(e) => setPhone(formatPhone(e.target.value))}
+                  onBlur={() => setTouched(true)}
+                  aria-invalid={showError || undefined}
+                  aria-describedby={showError ? errorId : undefined}
+                  disabled={busy}
+                />
+                <Button type="submit" variant="ice" size="pill-lg" className="px-8" disabled={busy}>
+                  {busy ? 'Отправляем…' : 'Подобрать'}
+                  {!busy && <Icon.arrowRight />}
+                </Button>
+              </form>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <span className="text-fg-2 text-[13px]">или напишите в мессенджер:</span>
-            <Button asChild variant="ghost-pill" size="icon-pill-sm" aria-label="Telegram">
-              <a href="#">
-                <Icon.tg />
-              </a>
-            </Button>
-            <Button asChild variant="ghost-pill" size="icon-pill-sm" aria-label="WhatsApp">
-              <a href="#">
-                <Icon.wa />
-              </a>
-            </Button>
-          </div>
+              {showError && (
+                <p
+                  id={errorId}
+                  role="alert"
+                  className="text-destructive mt-3 max-w-140 self-start text-left text-[13px] md:self-auto"
+                >
+                  Введите телефон полностью в формате +7 (xxx) xxx-xx-xx.
+                </p>
+              )}
+
+              <div className="text-fg-2 mt-5 flex items-start justify-center gap-2">
+                <span className="mt-0.5">
+                  <Icon.shield />
+                </span>
+                <span className="text-fg-2 max-w-105 text-left text-[13px]">
+                  Нажимая «Подобрать», вы соглашаетесь с{' '}
+                  <a
+                    href="#"
+                    className="text-fg-1 underline"
+                    style={{ textDecorationColor: 'var(--color-hairline-strong)' }}
+                  >
+                    политикой обработки персональных данных
+                  </a>
+                  .
+                </span>
+              </div>
+
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+                <span className="text-fg-2 text-[13px]">или напишите в мессенджер:</span>
+                <Button asChild variant="ghost-pill" size="icon-pill-sm" aria-label="Telegram">
+                  <a href="#">
+                    <Icon.tg />
+                  </a>
+                </Button>
+                <Button asChild variant="ghost-pill" size="icon-pill-sm" aria-label="WhatsApp">
+                  <a href="#">
+                    <Icon.wa />
+                  </a>
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </section>

@@ -8,6 +8,7 @@ type Destination = {
   region: string;
   tag: string;
   src: string;
+  alt: string;
   pos: string;
   desc: string;
   stats: string[];
@@ -19,6 +20,7 @@ const DESTINATIONS: Destination[] = [
     region: 'Кемеровская область',
     tag: 'Powder · Resort',
     src: '/img/sheregesh.png',
+    alt: 'Заснеженные склоны Шерегеша в густом лесу, вид с подъёмника',
     pos: '50% 40%',
     desc: 'Самый снежный и тусовочный курорт России. Гигантский пухляк, длинный сезон, лес для фрирайда.',
     stats: ['Декабрь — Май', 'до 4 м снега', '15 трасс'],
@@ -28,6 +30,7 @@ const DESTINATIONS: Destination[] = [
     region: 'Хибины, Мурманская обл.',
     tag: 'Freeride · Arctic',
     src: '/img/kirovsk.png',
+    alt: 'Хибины в Кировске: открытые фрирайд-склоны под полярным небом',
     pos: '50% 35%',
     desc: 'Бескомпромиссный фрирайд и суровый заполярный драйв. Север, тишина, северное сияние.',
     stats: ['Январь — Июнь', '67° с.ш.', 'хели-ски опция'],
@@ -37,6 +40,7 @@ const DESTINATIONS: Destination[] = [
     region: 'Кавказ, Карачаево-Черкесия',
     tag: 'Classic · Panorama',
     src: '/img/dombay.png',
+    alt: 'Панорама кавказских вершин над Домбаем, снежные трассы на переднем плане',
     pos: '50% 45%',
     desc: 'Кавказская классика с панорамами на 360°. Демократичные цены, тёплый юг и широкие склоны.',
     stats: ['Декабрь — Апрель', '3 200 м', 'панорама 360°'],
@@ -67,7 +71,7 @@ export function DestinationsSection() {
             <article key={d.name} className="dest-card h-110 md:h-145">
               <Photo
                 src={d.src}
-                alt=""
+                alt={d.alt}
                 objectPosition={d.pos}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
               />

@@ -3,16 +3,35 @@ import { LogoMark } from '@/components/brand/LogoMark';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
-const COLUMNS = [
-  { title: 'Навигация', items: ['О нас', 'Направления', 'Отзывы', 'Подобрать тур'] },
-  { title: 'Курорты', items: ['Шерегеш', 'Кировск', 'Домбай', 'Скоро: 4'] },
+type FooterItem = { label: string; href: string };
+type FooterColumn = { title: string; items: FooterItem[] };
+
+const COLUMNS: FooterColumn[] = [
+  {
+    title: 'Навигация',
+    items: [
+      { label: 'О нас', href: '#about' },
+      { label: 'Направления', href: '#destinations' },
+      { label: 'Отзывы', href: '#reviews' },
+      { label: 'Подобрать тур', href: '#cta' },
+    ],
+  },
+  {
+    title: 'Курорты',
+    items: [
+      { label: 'Шерегеш', href: '#' },
+      { label: 'Кировск', href: '#' },
+      { label: 'Домбай', href: '#' },
+      { label: 'Ещё 4 · 25–26', href: '#' },
+    ],
+  },
   {
     title: 'Контакты',
     items: [
-      '+7 (495) 000-00-00',
-      'hello@sanek.tours',
-      'Telegram @saneksupport',
-      'WhatsApp +7 985 ...',
+      { label: '+7 (495) 000-00-00', href: 'tel:+74950000000' },
+      { label: 'hello@sanek.tours', href: 'mailto:hello@sanek.tours' },
+      { label: 'Telegram @saneksupport', href: 'https://t.me/saneksupport' },
+      { label: 'WhatsApp +7 985 ...', href: 'https://wa.me/79850000000' },
     ],
   },
 ];
@@ -55,9 +74,12 @@ export function FooterSection() {
               <div className="section-num mb-4">{col.title}</div>
               <ul className="m-0 flex list-none flex-col gap-3 p-0">
                 {col.items.map((it) => (
-                  <li key={it}>
-                    <a href="#" className="text-fg-1 hover:text-fg-0 text-sm no-underline">
-                      {it}
+                  <li key={it.label}>
+                    <a
+                      href={it.href}
+                      className="text-fg-1 hover:text-fg-0 text-sm no-underline transition-colors duration-150"
+                    >
+                      {it.label}
                     </a>
                   </li>
                 ))}
@@ -69,12 +91,20 @@ export function FooterSection() {
         <Separator className="bg-hairline" />
 
         <div className="text-fg-2 flex flex-col gap-4 pt-7 text-xs md:flex-row md:items-center md:justify-between">
-          <span>© 2025 Sanek Tours · ИНН 0000000000 · ОГРНИП 000000000000000</span>
+          <span>
+            © {new Date().getFullYear()} Sanek Tours · ИНН 0000000000 · ОГРНИП 000000000000000
+          </span>
           <div className="flex flex-wrap gap-6">
-            <a href="#" className="text-fg-2 hover:text-fg-0 no-underline">
+            <a
+              href="#"
+              className="text-fg-2 hover:text-fg-0 no-underline transition-colors duration-150"
+            >
               Политика конфиденциальности
             </a>
-            <a href="#" className="text-fg-2 hover:text-fg-0 no-underline">
+            <a
+              href="#"
+              className="text-fg-2 hover:text-fg-0 no-underline transition-colors duration-150"
+            >
               Договор-оферта
             </a>
           </div>
