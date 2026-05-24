@@ -70,7 +70,6 @@ export function DestinationsSection() {
                 alt=""
                 objectPosition={d.pos}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                style={{ position: 'absolute', inset: 0 }}
               />
               <div className="scrim" />
               <div className="body">
@@ -79,13 +78,13 @@ export function DestinationsSection() {
                   <span className="text-fg-1 font-mono text-[11px] opacity-70">0{i + 1}</span>
                 </div>
 
-                <span className="text-fg-2 font-mono text-[11px] tracking-[0.1em] uppercase">
+                <span className="text-fg-2 font-mono text-[11px] tracking-widest uppercase">
                   {d.region}
                 </span>
                 <h3 className="font-display m-0 mt-2 mb-3.5 text-[42px] leading-[0.95] tracking-[-0.04em] md:text-[56px]">
                   {d.name}
                 </h3>
-                <p className="text-fg-1 m-0 max-w-80 text-[15px] leading-[1.5]">{d.desc}</p>
+                <p className="text-fg-1 m-0 max-w-80 text-[15px] leading-normal">{d.desc}</p>
 
                 <div className="reveal mt-5">
                   <div className="mb-5 flex flex-wrap gap-2">
@@ -105,9 +104,9 @@ export function DestinationsSection() {
           ))}
         </div>
 
-        <div className="border-hairline-strong mt-8 flex flex-col gap-4 rounded-[20px] border border-dashed p-7 md:flex-row md:items-center md:justify-between md:px-8">
+        <div className="border-hairline-strong mt-8 flex flex-col gap-4 rounded-lg border border-dashed p-7 md:flex-row md:items-center md:justify-between md:px-8">
           <div>
-            <span className="text-fg-2 font-mono text-[11px] tracking-[0.1em]">COMING / 25–26</span>
+            <span className="text-fg-2 font-mono text-[11px] tracking-widest">COMING / 25–26</span>
             <div className="text-fg-0 mt-2.5 flex flex-wrap gap-x-6 gap-y-1 text-[16px]">
               <span>Камчатка</span>
               <span className="text-fg-3">·</span>

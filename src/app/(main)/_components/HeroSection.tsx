@@ -74,11 +74,6 @@ export function HeroSection() {
             ))}
           </div>
         </div>
-
-        <div className="absolute bottom-10 left-1/2 z-5 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex">
-          <span className="text-fg-2 font-mono text-[10px] tracking-[0.2em] uppercase">scroll</span>
-          <div className="scroll-cue" />
-        </div>
       </div>
     </section>
   );

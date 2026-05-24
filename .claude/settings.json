@@ -1,5 +1,51 @@
 {
   "permissions": {
-    "allow": ["mcp__shadcn__list_items_in_registries"]
-  }
+    "allow": [
+      "mcp__shadcn__list_items_in_registries",
+      "mcp__pencil__get_screenshot",
+      "mcp__pencil__get_guidelines",
+      "Bash(npm run typecheck)",
+      "Bash(npm run lint)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(echo:*)",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(docker compose:*)",
+      "Bash(go build:*)",
+      "Bash(go test:*)",
+      "Edit",
+      "Read"
+    ],
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(sudo:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(ssh:*)",
+      "Bash(scp:*)",
+      "Bash(> /dev:*)",
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(chmod 777:*)",
+      "Bash(npm publish:*)",
+      "Bash(npm install -g:*)",
+      "Read(.env)",
+      "Read(*credentials*)",
+      "Read(*secret*)"
+    ],
+    "ask": ["Bash(git push:*)"]
+  },
+  "env": {},
+  "includeCoAuthoredBy": false
 }
