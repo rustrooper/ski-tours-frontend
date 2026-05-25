@@ -136,7 +136,7 @@ export function ReviewsSection() {
         >
           <CarouselContent className="-ml-5">
             {REVIEWS.map((r) => (
-              <CarouselItem key={r.name} className="basis-full pl-5 md:basis-1/3 lg:basis-1/2">
+              <CarouselItem key={r.name} className="basis-full pl-5 md:basis-1/3">
                 <Card className="border-hairline bg-bg-2 min-h-90 gap-6 rounded-lg p-8 ring-0">
                   <CardHeader className="flex flex-row items-center justify-between gap-2 p-0">
                     <div className="flex items-center gap-3.5">
