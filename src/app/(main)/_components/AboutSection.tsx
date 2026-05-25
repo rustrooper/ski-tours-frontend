@@ -18,8 +18,8 @@ const SLIDES = [
   { src: '/img/kirovsk.png', label: "PHOTO · TEAM TRIP — KIROVSK '24" },
   { src: '/img/sheregesh.png', label: "PHOTO · TEAM TRIP — KAMCHATKA '25" },
   { src: '/img/dombay.png', label: "PHOTO · TEAM TRIP — DOMBAY '25" },
-  { src: '/img/kirovsk.png', label: "PHOTO · TEAM TRIP — KOLA '24" },
-  { src: '/img/sheregesh.png', label: "PHOTO · TEAM TRIP — SHEREGESH '25" },
+  { src: '/img/fresh_line.jpg', label: "PHOTO · TEAM TRIP — KOLA '24" },
+  { src: '/img/snowboard_man_1.jpg', label: "PHOTO · TEAM TRIP — SHEREGESH '25" },
   { src: '/img/dombay.png', label: "PHOTO · TEAM TRIP — ARKHYZ '25" },
 ] as const;
 

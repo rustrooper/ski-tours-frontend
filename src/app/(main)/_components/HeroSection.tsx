@@ -1,5 +1,5 @@
 import { Icon } from '@/components/brand/Icon';
-import { Photo } from '@/components/brand/Photo';
+import { Video } from '@/components/brand/Video';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
@@ -12,10 +12,10 @@ const TRUST = [
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden">
-      <div className="relative h-svh min-h-160 md:h-230">
-        <Photo
-          src="/img/sheregesh.png"
-          alt=""
+      <div className="relative h-svh min-h-160 md:min-h-230">
+        <Video
+          src="/video/heroVideo.mp4"
+          poster="/img/sheregesh.png"
           heroLight
           preload
           style={{ position: 'absolute', inset: 0 }}

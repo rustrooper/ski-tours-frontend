@@ -345,7 +345,7 @@
   }
 }
 
-/* @media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
   .dest-card .photo {
     transition: none;
   }
@@ -358,4 +358,4 @@
   .scroll-cue::after {
     box-shadow: none;
   }
-} */
+}
