@@ -7,14 +7,13 @@ import { Icon } from '@/components/brand/Icon';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import {
   Carousel,
   type CarouselApi,
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
-import { Separator } from '@/components/ui/separator';
 
 type Review = {
   name: string;
@@ -140,20 +139,7 @@ export function ReviewsSection() {
               <CarouselItem key={r.name} className="basis-full pl-5 md:basis-1/3">
                 <Card className="border-hairline bg-bg-2 min-h-90 gap-6 rounded-lg p-8 ring-0">
                   <CardHeader className="flex flex-row items-center justify-between gap-2 p-0">
-                    <span
-                      className="font-display text-ice text-[80px] leading-[0.6] font-semibold opacity-40"
-                      aria-hidden="true"
-                    >
-                      {'«'}
-                    </span>
-                    <Badge variant="chip">{r.dest}</Badge>
-                  </CardHeader>
-                  <CardContent className="text-fg-0 m-0 flex-1 p-0 text-base leading-relaxed">
-                    {r.text}
-                  </CardContent>
-                  <CardFooter className="m-0 flex flex-col gap-3.5 border-0 bg-transparent p-0">
-                    <Separator className="bg-hairline" />
-                    <div className="flex w-full items-center gap-3.5">
+                    <div className="flex items-center gap-3.5">
                       <Avatar
                         size="lg"
                         className="bg-linear-to-br from-[oklch(0.36_0.04_230)] to-[oklch(0.24_0.02_230)]"
@@ -169,7 +155,11 @@ export function ReviewsSection() {
                         </div>
                       </div>
                     </div>
-                  </CardFooter>
+                    <Badge variant="chip">{r.dest}</Badge>
+                  </CardHeader>
+                  <CardContent className="text-fg-0 m-0 flex-1 p-0 text-base leading-relaxed">
+                    {r.text}
+                  </CardContent>
                 </Card>
               </CarouselItem>
             ))}

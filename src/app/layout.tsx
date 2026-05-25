@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${spaceGrotesk.variable} ${manrope.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${manrope.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <HeaderSection />

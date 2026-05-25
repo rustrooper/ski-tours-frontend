@@ -10,8 +10,8 @@ import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 const NAV = [
-  { href: '#about', label: 'О нас', num: '01' },
-  { href: '#destinations', label: 'Направления', num: '02' },
+  { href: '#destinations', label: 'Направления', num: '01' },
+  { href: '#about', label: 'О нас', num: '02' },
   { href: '#reviews', label: 'Отзывы', num: '03' },
 ];
 

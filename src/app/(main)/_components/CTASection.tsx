@@ -6,7 +6,7 @@ import { Icon } from '@/components/brand/Icon';
 import { Photo } from '@/components/brand/Photo';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { formatPhone, isValidPhone } from '@/lib/phone';
+import { extractDigits, formatPhone, isValidPhone } from '@/lib/phone';
 
 type FormStatus = 'idle' | 'submitting' | 'success';
 
@@ -21,7 +21,7 @@ export function CTASection() {
   const errorId = 'cta-phone-error';
   const busy = status === 'submitting';
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isValid) {
       setSubmitAttempted(true);
@@ -82,7 +82,19 @@ export function CTASection() {
                   aria-label="Телефон"
                   className="flex-1"
                   value={phone}
-                  onChange={(e) => setPhone(formatPhone(e.target.value))}
+                  onChange={(e) => {
+                    const next = e.target.value;
+                    const inputType = (e.nativeEvent as InputEvent).inputType;
+                    if (
+                      inputType === 'deleteContentBackward' &&
+                      next.length < phone.length &&
+                      !/\d/.test(phone[next.length] ?? '')
+                    ) {
+                      setPhone(formatPhone(extractDigits(next).slice(0, -1)));
+                      return;
+                    }
+                    setPhone(formatPhone(next));
+                  }}
                   onBlur={() => setTouched(true)}
                   aria-invalid={showError || undefined}
                   aria-describedby={showError ? errorId : undefined}
@@ -124,7 +136,7 @@ export function CTASection() {
               <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
                 <span className="text-fg-2 text-[13px]">или напишите в мессенджер:</span>
                 <Button asChild variant="ghost-pill" size="icon-pill-sm" aria-label="Telegram">
-                  <a href="#">
+                  <a href="https://t.me/XStreeeM">
                     <Icon.tg />
                   </a>
                 </Button>
