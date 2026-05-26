@@ -115,6 +115,17 @@
     height: 1px;
     background: var(--color-ice-2);
     display: inline-block;
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  /* Section eyebrows expand their bar when their reveal wrapper enters view */
+  .reveal-in .st-eyebrow::before,
+  .st-eyebrow.is-static::before {
+    transform: scaleX(1);
+  }
+  .st-eyebrow--no-bar::before {
+    display: none;
   }
 
   .st-h1 {
@@ -152,6 +163,11 @@
     color: var(--color-fg-1);
     letter-spacing: -0.012em;
   }
+  .st-lede.on-media,
+  .on-media .st-lede {
+    color: var(--color-fg-0);
+    text-shadow: 0 1px 2px oklch(0 0 0 / 0.4);
+  }
   .st-body {
     font-size: 16px;
     line-height: 1.65;
@@ -183,6 +199,16 @@
     height: 56px;
     background: linear-gradient(180deg, transparent, var(--color-fg-1));
     position: relative;
+    transform-origin: top center;
+    transform: scaleY(0);
+    opacity: 0;
+    transition:
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.7s,
+      opacity 0.5s ease-out 1.7s;
+  }
+  .scroll-cue.is-lit {
+    transform: scaleY(1);
+    opacity: 1;
   }
   .scroll-cue::after {
     content: '';
@@ -194,6 +220,21 @@
     border-radius: 99px;
     background: var(--color-ice);
     box-shadow: 0 0 12px var(--color-ice);
+    opacity: 0;
+    transition: opacity 0.4s ease-out 2.4s;
+  }
+  .scroll-cue.is-lit::after {
+    opacity: 1;
+    animation: scrollPulse 2.8s ease-in-out 3s infinite;
+  }
+  @keyframes scrollPulse {
+    0%,
+    100% {
+      box-shadow: 0 0 12px var(--color-ice);
+    }
+    50% {
+      box-shadow: 0 0 22px var(--color-ice);
+    }
   }
 
   /* Indicator dots */
@@ -292,6 +333,65 @@
     backdrop-filter: blur(4px);
   }
 
+  /* Masked line for hero headline — children slide up from below a fixed clip */
+  .line-mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.12em;
+  }
+
+  /* Subtle ice glow that breathes once on the hero italic word */
+  .ice-glint {
+    position: relative;
+    display: inline-block;
+  }
+  .ice-glint::after {
+    content: '';
+    position: absolute;
+    inset: -8% -6%;
+    border-radius: 8px;
+    background: radial-gradient(60% 70% at 50% 50%, oklch(0.86 0.055 215 / 0.22), transparent 70%);
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    animation: iceGlint 2.6s cubic-bezier(0.16, 1, 0.3, 1) 1.3s 1 both;
+  }
+  @keyframes iceGlint {
+    0% {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    35% {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.04);
+    }
+  }
+
+  /* Ice CTA: arrow nudges right on hover */
+  [data-variant='ice'] svg {
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-variant='ice']:hover svg {
+    transform: translateX(3px);
+  }
+  [data-variant='ghost-pill'] svg {
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-variant='ghost-pill']:hover svg {
+    transform: translateX(2px);
+  }
+  /* link-cool arrow nudges up-right (it's an arrow-up-right icon) */
+  [data-variant='link-cool'] svg {
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-variant='link-cool']:hover svg {
+    transform: translate(2px, -2px);
+  }
+
   /* Destination card — full-bleed photo card with hover/focus reveal */
   .dest-card {
     position: relative;
@@ -355,7 +455,28 @@
   .dots .d {
     transition: none;
   }
+  .scroll-cue {
+    transform: scaleY(1);
+    opacity: 1;
+    transition: none;
+  }
   .scroll-cue::after {
     box-shadow: none;
+    opacity: 1;
+    transition: none;
+    animation: none;
+  }
+  .st-eyebrow::before {
+    transform: scaleX(1);
+    transition: none;
+  }
+  .ice-glint::after {
+    animation: none;
+    opacity: 0;
+  }
+  [data-variant='ice'] svg,
+  [data-variant='ghost-pill'] svg,
+  [data-variant='link-cool'] svg {
+    transition: none;
   }
 }

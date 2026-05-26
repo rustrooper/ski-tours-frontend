@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import { Icon } from '@/components/brand/Icon';
@@ -24,13 +24,23 @@ const SOCIALS: Array<{ key: string; label: string; icon: () => React.ReactElemen
 
 export function HeaderSection() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <header
-      className="border-hairline fixed inset-x-0 top-0 z-50 border-b"
+      data-scrolled={scrolled || undefined}
+      className="border-hairline fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ease-out"
       style={{
-        background: 'oklch(0.13 0.012 240 / 0.4)',
-        backdropFilter: 'blur(18px) saturate(160%)',
+        background: scrolled ? 'oklch(0.13 0.012 240 / 0.8)' : 'oklch(0.13 0.012 240 / 0.32)',
+        backdropFilter: scrolled ? 'blur(22px) saturate(180%)' : 'blur(14px) saturate(150%)',
+        borderBottomColor: scrolled ? 'var(--color-hairline-strong)' : 'var(--color-hairline)',
       }}
     >
       <div className="mx-auto flex h-16 w-full max-w-360 items-center justify-between px-5 md:h-17 md:px-16">

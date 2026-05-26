@@ -31,6 +31,12 @@ export const metadata: Metadata = {
   title: 'Sanek Tours — авторские горнолыжные туры по России',
   description:
     'Туда, где живёт пухляк. Авторские горнолыжные туры по России от тех, кто сам катается. Логистика, жильё, ски-пассы — на нас.',
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: { index: false, follow: false, noimageindex: true },
+  },
 };
 
 export default function RootLayout({

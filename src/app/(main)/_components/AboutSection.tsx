@@ -1,10 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import Fade from 'embla-carousel-fade';
 
 import { Icon } from '@/components/brand/Icon';
 import { Photo } from '@/components/brand/Photo';
+import { Reveal } from '@/components/motion/Reveal';
+import { Stagger, StaggerItem } from '@/components/motion/Stagger';
 import { Button } from '@/components/ui/button';
 import {
   Carousel,
@@ -13,6 +16,7 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import { Separator } from '@/components/ui/separator';
+import { EASE_OUT_QUINT, viewportOnce } from '@/lib/motion';
 
 const SLIDES = [
   { src: '/img/kirovsk.png', label: "PHOTO · TEAM TRIP — KIROVSK '24" },
@@ -60,48 +64,60 @@ export function AboutSection() {
   return (
     <section id="about" className="bg-bg-0 px-5 py-20 md:px-16 md:py-35">
       <div className="mx-auto grid w-full max-w-360 grid-cols-1 items-start gap-12 md:grid-cols-[1fr_1.05fr] md:gap-24">
-        <div className="md:sticky md:top-30">
-          <div className="section-num mb-4 block md:mb-6">01 / О нас</div>
-          <h2 className="st-h2 m-0 mb-8 max-w-135 md:mb-9">
-            Россия — рай
-            <br />
-            для райдера.
-          </h2>
+        <Stagger className="md:sticky md:top-30" childrenDelay={0.07} loose>
+          <StaggerItem>
+            <div className="section-num mb-4 block md:mb-6">01 / О нас</div>
+          </StaggerItem>
+          <StaggerItem y={22}>
+            <h2 className="st-h2 m-0 mb-8 max-w-135 md:mb-9">
+              Россия — рай
+              <br />
+              для райдера.
+            </h2>
+          </StaggerItem>
 
           <div className="flex max-w-120 flex-col gap-7">
-            <p className="st-body">
-              Найти идеальный склон, мягкий пухляк и работающий подъёмник без «сюрпризов» может
-              только местный эксперт. Мы стали теми, кто закрыл вопрос «куда поехать» для сотен
-              райдеров.
-            </p>
-
-            <div>
-              <h4 className="st-h4 text-ice m-0 mb-2.5">Мы — не агрегатор.</h4>
+            <StaggerItem>
               <p className="st-body">
-                Мы команда фанатов, которые живут горами. Лично объездили все популярные и дикие
-                курорты от Кольского до Камчатки. Отбираем только лучшее: трассы, жильё в шаговой
-                доступности от подъёмника, никакого скрытого подвоха.
+                Найти идеальный склон, мягкий пухляк и работающий подъёмник без «сюрпризов» может
+                только местный эксперт. Мы стали теми, кто закрыл вопрос «куда поехать» для сотен
+                райдеров.
               </p>
-            </div>
+            </StaggerItem>
 
-            <div>
-              <h4 className="st-h4 m-0 mb-2.5">Философия — просто катайся.</h4>
-              <p className="st-body">
-                Всю логистику — трансферы, проживание, ски-пассы, и даже компанию для катания — мы
-                берём на себя.
-              </p>
-            </div>
+            <StaggerItem>
+              <div>
+                <h4 className="st-h4 text-ice m-0 mb-2.5">Мы — не агрегатор.</h4>
+                <p className="st-body">
+                  Мы команда фанатов, которые живут горами. Лично объездили все популярные и дикие
+                  курорты от Кольского до Камчатки. Отбираем только лучшее: трассы, жильё в шаговой
+                  доступности от подъёмника, никакого скрытого подвоха.
+                </p>
+              </div>
+            </StaggerItem>
 
-            <div className="flex items-center gap-4 pt-3">
-              <Button variant="ghost-pill" size="pill">
-                Познакомиться с командой
-                <Icon.arrowRight />
-              </Button>
-            </div>
+            <StaggerItem>
+              <div>
+                <h4 className="st-h4 m-0 mb-2.5">Философия — просто катайся.</h4>
+                <p className="st-body">
+                  Всю логистику — трансферы, проживание, ски-пассы, и даже компанию для катания — мы
+                  берём на себя.
+                </p>
+              </div>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="flex items-center gap-4 pt-3">
+                <Button variant="ghost-pill" size="pill">
+                  Познакомиться с командой
+                  <Icon.arrowRight />
+                </Button>
+              </div>
+            </StaggerItem>
           </div>
-        </div>
+        </Stagger>
 
-        <div>
+        <Reveal y={28} duration={0.9} loose>
           <Carousel
             className="relative"
             setApi={setApi}
@@ -172,24 +188,41 @@ export function AboutSection() {
             })}
           </div>
 
-          <div className="mt-10 grid grid-cols-3">
+          <motion.div
+            className="mt-10 grid grid-cols-3"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+            }}
+          >
             <Separator className="bg-hairline col-span-3" />
             {STATS.map(([n, l], i) => (
-              <div
+              <motion.div
                 key={l}
                 className="py-6"
                 style={{
                   borderLeft: i > 0 ? '1px solid var(--color-hairline)' : 'none',
                   paddingLeft: i > 0 ? 24 : 0,
                 }}
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.7, ease: EASE_OUT_QUINT },
+                  },
+                }}
               >
                 <div className="font-display text-fg-0 text-[44px] tracking-[-0.04em]">{n}</div>
                 <div className="text-fg-2 mt-1 text-[13px]">{l}</div>
-              </div>
+              </motion.div>
             ))}
             <Separator className="bg-hairline col-span-3" />
-          </div>
-        </div>
+          </motion.div>
+        </Reveal>
       </div>
     </section>
   );

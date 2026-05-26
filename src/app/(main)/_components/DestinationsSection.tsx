@@ -1,7 +1,14 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
 import { Icon } from '@/components/brand/Icon';
 import { Photo } from '@/components/brand/Photo';
+import { Reveal } from '@/components/motion/Reveal';
+import { Stagger } from '@/components/motion/Stagger';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { EASE_OUT_QUINT, viewportOnce } from '@/lib/motion';
 
 type Destination = {
   name: string;
@@ -51,7 +58,10 @@ export function DestinationsSection() {
   return (
     <section id="destinations" className="bg-bg-1 px-5 py-20 md:px-16 md:pt-40 md:pb-35">
       <div className="mx-auto w-full max-w-360">
-        <div className="mb-12 flex flex-col gap-8 md:mb-20 md:flex-row md:items-end md:justify-between md:gap-12">
+        <Reveal
+          className="reveal-in mb-12 flex flex-col gap-8 md:mb-20 md:flex-row md:items-end md:justify-between md:gap-12"
+          y={20}
+        >
           <div>
             <div className="section-num mb-4 md:mb-6">02 / Направления</div>
             <h2 className="st-h2 m-0 max-w-220">
@@ -64,51 +74,38 @@ export function DestinationsSection() {
             Каждое направление — наш базовый лагерь. Мы катаемся там сами и знаем, где лежит самый
             мягкий пухляк, а какой подъёмник простоит весь день.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          childrenDelay={0.09}
+          loose
+        >
           {DESTINATIONS.map((d, i) => (
-            <article key={d.name} className="dest-card h-110 md:h-145">
-              <Photo
-                src={d.src}
-                alt={d.alt}
-                objectPosition={d.pos}
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-              />
-              <div className="scrim" />
-              <div className="body">
-                <div className="absolute top-6 right-6 left-6 z-4 flex items-start justify-between">
-                  <Badge variant="chip">{d.tag}</Badge>
-                  <span className="text-fg-1 font-mono text-[11px] opacity-70">0{i + 1}</span>
-                </div>
-
-                <span className="text-fg-2 font-mono text-[11px] tracking-widest uppercase">
-                  {d.region}
-                </span>
-                <h3 className="font-display m-0 mt-2 mb-3.5 text-[42px] leading-[0.95] tracking-[-0.04em] md:text-[56px]">
-                  {d.name}
-                </h3>
-                <p className="text-fg-1 m-0 max-w-80 text-[15px] leading-normal">{d.desc}</p>
-
-                <div className="reveal mt-5">
-                  <div className="mb-5 flex flex-wrap gap-2">
-                    {d.stats.map((s) => (
-                      <Badge key={s} variant="chip">
-                        {s}
-                      </Badge>
-                    ))}
-                  </div>
-                  <Button variant="ice" size="pill">
-                    Подробнее
-                    <Icon.arrowUpRight />
-                  </Button>
-                </div>
-              </div>
-            </article>
+            <motion.article
+              key={d.name}
+              className="dest-card h-110 md:h-145"
+              variants={{
+                hidden: { opacity: 0, y: 26 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.75, ease: EASE_OUT_QUINT },
+                },
+              }}
+            >
+              <DestinationCardInner d={d} i={i} />
+            </motion.article>
           ))}
-        </div>
+        </Stagger>
 
-        <div className="border-hairline-strong mt-8 flex flex-col gap-4 rounded-lg border border-dashed p-7 md:flex-row md:items-center md:justify-between md:px-8">
+        <motion.div
+          className="border-hairline-strong mt-8 flex flex-col gap-4 rounded-lg border border-dashed p-7 md:flex-row md:items-center md:justify-between md:px-8"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewportOnce}
+          transition={{ duration: 0.7, ease: EASE_OUT_QUINT, delay: 0.1 }}
+        >
           <div>
             <span className="text-fg-2 font-mono text-[11px] tracking-widest">COMING / 25–26</span>
             <div className="text-fg-0 mt-2.5 flex flex-wrap gap-x-6 gap-y-1 text-[16px]">
@@ -125,8 +122,50 @@ export function DestinationsSection() {
             Все направления
             <Icon.arrowUpRight />
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
+  );
+}
+
+function DestinationCardInner({ d, i }: { d: Destination; i: number }) {
+  return (
+    <>
+      <Photo
+        src={d.src}
+        alt={d.alt}
+        objectPosition={d.pos}
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+      />
+      <div className="scrim" />
+      <div className="body">
+        <div className="absolute top-6 right-6 left-6 z-4 flex items-start justify-between">
+          <Badge variant="chip">{d.tag}</Badge>
+          <span className="text-fg-1 font-mono text-[11px] opacity-70">0{i + 1}</span>
+        </div>
+
+        <span className="text-fg-2 font-mono text-[11px] tracking-widest uppercase">
+          {d.region}
+        </span>
+        <h3 className="font-display m-0 mt-2 mb-3.5 text-[42px] leading-[0.95] tracking-[-0.04em] md:text-[56px]">
+          {d.name}
+        </h3>
+        <p className="text-fg-1 m-0 max-w-80 text-[15px] leading-normal">{d.desc}</p>
+
+        <div className="reveal mt-5">
+          <div className="mb-5 flex flex-wrap gap-2">
+            {d.stats.map((s) => (
+              <Badge key={s} variant="chip">
+                {s}
+              </Badge>
+            ))}
+          </div>
+          <Button variant="ice" size="pill">
+            Подробнее
+            <Icon.arrowUpRight />
+          </Button>
+        </div>
+      </div>
+    </>
   );
 }

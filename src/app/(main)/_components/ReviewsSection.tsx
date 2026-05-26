@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import Autoplay from 'embla-carousel-autoplay';
 
 import { Icon } from '@/components/brand/Icon';
+import { Reveal } from '@/components/motion/Reveal';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -14,6 +16,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
+import { EASE_OUT_QUINT, viewportOnce } from '@/lib/motion';
 
 type Review = {
   name: string;
@@ -98,7 +101,10 @@ export function ReviewsSection() {
   return (
     <section id="reviews" className="bg-bg-1 px-5 py-20 md:px-16 md:py-35">
       <div className="mx-auto w-full max-w-360">
-        <div className="mb-10 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
+        <Reveal
+          className="mb-10 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between"
+          y={20}
+        >
           <div>
             <div className="section-num mb-4 block md:mb-6">03 / Отзывы</div>
             <h2 className="st-h2 m-0 max-w-175">
@@ -126,7 +132,7 @@ export function ReviewsSection() {
               <Icon.chevR />
             </Button>
           </div>
-        </div>
+        </Reveal>
 
         <Carousel
           setApi={setApi}
@@ -135,32 +141,43 @@ export function ReviewsSection() {
           className="relative"
         >
           <CarouselContent className="-ml-5">
-            {REVIEWS.map((r) => (
-              <CarouselItem key={r.name} className="basis-full pl-5 md:basis-1/3">
-                <Card className="border-hairline bg-bg-2 min-h-90 gap-6 rounded-lg p-8 ring-0">
-                  <CardHeader className="flex flex-row items-center justify-between gap-2 p-0">
-                    <div className="flex items-center gap-3.5">
-                      <Avatar
-                        size="lg"
-                        className="bg-linear-to-br from-[oklch(0.36_0.04_230)] to-[oklch(0.24_0.02_230)]"
-                      >
-                        <AvatarFallback className="font-display text-fg-0 bg-transparent text-base font-semibold">
-                          {r.initials}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <div className="text-fg-0 text-sm font-semibold">{r.name}</div>
-                        <div className="text-fg-2 text-[13px]" aria-label="5 из 5 звёзд">
-                          ★★★★★
+            {REVIEWS.map((r, i) => (
+              <CarouselItem key={r.name} className="basis-full pl-5 md:basis-1/2 xl:basis-1/3">
+                <motion.div
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={viewportOnce}
+                  transition={{
+                    duration: 0.7,
+                    ease: EASE_OUT_QUINT,
+                    delay: Math.min(i, 2) * 0.09,
+                  }}
+                >
+                  <Card className="border-hairline bg-bg-2 min-h-90 gap-6 rounded-lg p-8 ring-0">
+                    <CardHeader className="flex flex-row items-center justify-between gap-2 p-0">
+                      <div className="flex items-center gap-3.5">
+                        <Avatar
+                          size="lg"
+                          className="bg-linear-to-br from-[oklch(0.36_0.04_230)] to-[oklch(0.24_0.02_230)]"
+                        >
+                          <AvatarFallback className="font-display text-fg-0 bg-transparent text-base font-semibold">
+                            {r.initials}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <div className="text-fg-0 text-sm font-semibold">{r.name}</div>
+                          <div className="text-fg-2 text-[13px]" aria-label="5 из 5 звёзд">
+                            ★★★★★
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <Badge variant="chip">{r.dest}</Badge>
-                  </CardHeader>
-                  <CardContent className="text-fg-0 m-0 flex-1 p-0 text-base leading-relaxed">
-                    {r.text}
-                  </CardContent>
-                </Card>
+                      <Badge variant="chip">{r.dest}</Badge>
+                    </CardHeader>
+                    <CardContent className="text-fg-0 m-0 flex-1 p-0 text-base leading-relaxed">
+                      {r.text}
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </CarouselItem>
             ))}
           </CarouselContent>
