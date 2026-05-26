@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, ReactNode, SyntheticEvent } from 'react';
 import { useEffect, useRef } from 'react';
 
 type Props = {
@@ -15,6 +15,7 @@ type Props = {
   objectPosition?: string;
   sizes?: string;
   preload?: boolean;
+  onProgress?: (state: { currentTime: number; duration: number }) => void;
   children?: ReactNode;
 };
 
@@ -29,9 +30,16 @@ export function Video({
   objectPosition = 'center',
   sizes = '100vw',
   preload = false,
+  onProgress,
   children,
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const reportProgress = (e: SyntheticEvent<HTMLVideoElement>) => {
+    if (!onProgress) return;
+    const v = e.currentTarget;
+    onProgress({ currentTime: v.currentTime, duration: v.duration || 0 });
+  };
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -65,6 +73,8 @@ export function Video({
         preload="metadata"
         poster={poster}
         aria-hidden="true"
+        onLoadedMetadata={reportProgress}
+        onTimeUpdate={reportProgress}
         style={{
           position: 'absolute',
           inset: 0,

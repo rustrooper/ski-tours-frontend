@@ -191,6 +191,18 @@
     background: oklch(0.78 0.13 25);
     box-shadow: 0 0 0 4px oklch(0.78 0.13 25 / 0.18);
     display: inline-block;
+    animation: live-pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes live-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 0 4px oklch(0.78 0.13 25 / 0.18);
+    }
+    50% {
+      opacity: 0.55;
+      box-shadow: 0 0 0 7px oklch(0.78 0.13 25 / 0.05);
+    }
   }
 
   /* Scroll cue */
@@ -464,6 +476,9 @@
     box-shadow: none;
     opacity: 1;
     transition: none;
+    animation: none;
+  }
+  .live-dot {
     animation: none;
   }
   .st-eyebrow::before {

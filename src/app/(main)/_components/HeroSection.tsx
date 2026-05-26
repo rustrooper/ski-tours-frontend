@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion, type Variants } from 'framer-motion';
 
 import { Icon } from '@/components/brand/Icon';
@@ -14,6 +14,12 @@ const TRUST = [
   ['340+', 'райдеров в сезоне'],
   ['4.9', 'средняя оценка'],
 ] as const;
+
+const formatClock = (totalSeconds: number) => {
+  const m = Math.floor(totalSeconds / 60);
+  const s = totalSeconds % 60;
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+};
 
 const lineUp: Variants = {
   hidden: { y: '110%' },
@@ -41,21 +47,21 @@ const barDraw: Variants = {
 };
 
 export function HeroSection() {
-  const [cueLit, setCueLit] = useState(false);
-
-  useEffect(() => {
-    const t = window.setTimeout(() => setCueLit(true), 50);
-    return () => window.clearTimeout(t);
-  }, []);
+  const [remaining, setRemaining] = useState(14);
 
   return (
     <section className="relative overflow-hidden">
       <div className="relative h-svh min-h-160 md:min-h-230">
         <Video
           src="/video/heroVideo.mp4"
+          srcWebm="/video/heroVideo.webm"
           poster="/img/sheregesh.png"
           heroLight
           preload
+          onProgress={({ currentTime, duration }) => {
+            if (!duration) return;
+            setRemaining(Math.max(0, Math.ceil(duration - currentTime)));
+          }}
           style={{ position: 'absolute', inset: 0 }}
         />
         <motion.div
@@ -80,7 +86,7 @@ export function HeroSection() {
             className="border-hairline-strong px-3.5 py-2 backdrop-blur-md"
             style={{ background: 'oklch(0 0 0 / 0.35)' }}
           >
-            <span className="live-dot mr-1" /> 4K · LOOP · 00:38
+            <span className="live-dot mr-1" /> FHD · LOOP · {formatClock(remaining)}
           </Badge>
         </motion.div>
 
