@@ -2,33 +2,67 @@
 node_modules/
 .pnpm-store/
 .pnpm/
+.pnp
+.pnp.*
+.yarn/
 
-# Системные папки
+# Локальная сборка и кэши Next.js (пересобираются на сервере)
+.next/
+out/
+build/
+coverage/
+
+# TypeScript кэш и автогенерация
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# Системные/служебные папки разработки
 .git/
+.gitignore
+.gitattributes
 .husky/
 .claude/
 .agents/
+.idea/
+.vscode/
+.vercel/
 
-# Локальные конфиги и доки (не нужны для сборки)
+# Локальные конфиги и документация (не нужны для сборки)
 README.md
 AGENTS.md
 CLAUDE.md
 DESIGN.md
 PRODUCT.md
 skills-lock.json
+.mcp.json
+docs/
 
-# Конфиги линтеров и форматтеров (не влияют на сборку)
+# Конфиги линтеров и форматтеров (не влияют на прод-сборку)
 .eslintcache
-.prettierrc.json
-.prettierignore
+.eslintrc*
 eslint.config.mjs
 .prettierrc
+.prettierrc.json
+.prettierignore
 
-# Git hooks
-.husky/
+# Переменные окружения и секреты (задаются на сервере)
+.env
+.env.*
+*.pem
+*.key
 
-# Другие служебные папки
-.idea/
-.vscode/
+# Логи и отладка
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Локальные исходники медиа (не отдаются в прод)
+media-src/
+
+# Системные файлы ОС
 .DS_Store
+Thumbs.db
+desktop.ini
