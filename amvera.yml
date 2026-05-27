@@ -6,7 +6,9 @@ meta:
 build:
   skip: false
   additionalCommands:
-    - pnpm run build
+    - node --version && pnpm --version
+    - NODE_OPTIONS="--max-old-space-size=2048" pnpm run build 2>&1
+    - ls -la .next/standalone || (echo "standalone missing — build failed" && exit 1)
     - cp -r public .next/standalone/
     - cp -r .next/static .next/standalone/.next/
   artifacts:
