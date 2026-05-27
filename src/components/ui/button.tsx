@@ -10,7 +10,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground [a]:hover:bg-primary/80',
-        cta: 'bg-cta text-cta-foreground shadow-cta hover:bg-cta-hover focus-visible:border-cta focus-visible:ring-cta/30',
+        ice: 'rounded-full bg-ice font-semibold text-[oklch(0.18_0.012_240)] tracking-[-0.01em] shadow-[0_1px_0_oklch(1_0_0_/_0.4)_inset,0_8px_24px_oklch(0.86_0.055_215_/_0.18)] hover:-translate-y-px hover:bg-[oklch(0.92_0.045_215)] hover:shadow-[0_0_0_1px_oklch(0.86_0.055_215_/_0.4),0_8px_32px_oklch(0.86_0.055_215_/_0.18)]',
+        'ghost-pill':
+          'rounded-full border border-hairline-strong bg-transparent font-semibold text-fg-0 tracking-[-0.01em] hover:border-fg-1 hover:bg-white/4',
         outline:
           'border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50',
         secondary:
@@ -20,6 +22,8 @@ const buttonVariants = cva(
         destructive:
           'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40',
         link: 'text-primary underline-offset-4 hover:underline',
+        'link-cool':
+          'h-auto rounded-none p-0 font-semibold text-fg-0 hover:text-ice active:translate-y-0',
       },
       size: {
         default:
@@ -27,12 +31,16 @@ const buttonVariants = cva(
         xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         lg: 'h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
+        pill: 'h-11 gap-2 px-5 text-sm',
+        'pill-lg': 'h-14 gap-2 px-7 text-[15px]',
         icon: 'size-8',
         'icon-xs':
           "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
         'icon-sm':
           'size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg',
         'icon-lg': 'size-9',
+        'icon-pill': 'size-11 rounded-full',
+        'icon-pill-sm': 'size-10 rounded-full',
       },
     },
     defaultVariants: {

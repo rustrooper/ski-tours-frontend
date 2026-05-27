@@ -1,23 +1,42 @@
 import type { Metadata } from 'next';
-import { Inter, Unbounded } from 'next/font/google';
+import { Space_Grotesk, Manrope, JetBrains_Mono } from 'next/font/google';
+
+import { FooterSection } from '@/components/layout/FooterSection';
+import { HeaderSection } from '@/components/layout/HeaderSection';
+
 import './globals.css';
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin', 'cyrillic'],
+const spaceGrotesk = Space_Grotesk({
+  variable: '--font-space-grotesk',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
 
-const unbounded = Unbounded({
-  variable: '--font-unbounded',
+const manrope = Manrope({
+  variable: '--font-manrope',
   subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500'],
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Снежные вершины — горнолыжный тур в Красную Поляну',
+  title: 'Sanek Tours — авторские горнолыжные туры по России',
   description:
-    'Авторский тур на 7 дней: ски-пасс, шале у подъёмников, инструктор и трансфер. Февраль 2027.',
+    'Туда, где живёт пухляк. Авторские горнолыжные туры по России от тех, кто сам катается. Логистика, жильё, ски-пассы — на нас.',
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: { index: false, follow: false, noimageindex: true },
+  },
 };
 
 export default function RootLayout({
@@ -26,8 +45,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className={`${inter.variable} ${unbounded.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+    <html
+      lang="ru"
+      className={`${spaceGrotesk.variable} ${manrope.variable} ${jetbrainsMono.variable} antialiased`}
+    >
+      <body className="flex min-h-full flex-col">
+        <HeaderSection />
+        <main className="flex-1">{children}</main>
+        <FooterSection />
+      </body>
     </html>
   );
 }
