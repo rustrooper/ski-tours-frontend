@@ -1,0 +1,21 @@
+meta:
+  environment: nodejs
+  toolchain:
+    name: pnpm
+    version: '20'
+build:
+  skip: false
+  additionalCommands:
+    - pnpm run build
+    - cp -r public .next/standalone/
+    - cp -r .next/static .next/standalone/.next/
+  artifacts:
+    .next/standalone: /
+run:
+  persistenceMount: /data
+  scriptName: null
+  scriptArguments: null
+  nodeArguments: null
+  command: PORT=80 node server.js
+  containerPort: 80
+  servicePort: 80
