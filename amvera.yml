@@ -1,24 +1,12 @@
 # amvera.yml
 meta:
-  environment: node
+  environment: docker
   toolchain:
-    name: npm
-    version: '22' # Используйте вашу версию Node.js
+    name: docker
 
 build:
-  skip: false
-  additionalCommands:
-    - node --version
-    - pnpm --version
-    - NODE_OPTIONS=--max-old-space-size=2048 pnpm run build
-    - cp -r public .next/standalone/
-    - cp -r .next/static .next/standalone/.next/
-  artifacts:
-    .next/standalone: /
+  dockerfile: Dockerfile
 
 run:
   persistenceMount: /data
-  scriptName: server.js # 👈 Обязательный параметр для запуска
-  scriptPath: .next/standalone
-  command: PORT=80
   containerPort: 80
