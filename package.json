@@ -9,8 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "format": "prettier --write .",
-    "prepare": "husky || true"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@tabler/icons-react": "^3.44.0",
