@@ -3,4 +3,3 @@ onlyBuiltDependencies:
   - unrs-resolver
   - msw
   - '@tailwindcss/oxide'
-dangerouslyAllowAllBuilds: true

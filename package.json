@@ -56,13 +56,5 @@
     "*.{yml,yaml}": [
       "prettier --write"
     ]
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp",
-      "unrs-resolver",
-      "msw",
-      "@tailwindcss/oxide"
-    ]
   }
 }
