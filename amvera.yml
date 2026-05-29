@@ -1,7 +1,9 @@
+# amvera.yml
 meta:
-  environment: nodejs
-  version: '22'
-  build-tool: pnpm@10.15.0
+  environment: node
+  toolchain:
+    name: npm
+    version: '22' # Используйте вашу версию Node.js
 
 build:
   skip: false
@@ -9,7 +11,6 @@ build:
     - node --version
     - pnpm --version
     - NODE_OPTIONS=--max-old-space-size=2048 pnpm run build
-    - ls -la .next/standalone
     - cp -r public .next/standalone/
     - cp -r .next/static .next/standalone/.next/
   artifacts:
@@ -17,6 +18,7 @@ build:
 
 run:
   persistenceMount: /data
-  command: cd .next/standalone && PORT=80 node server.js
+  scriptName: server.js # 👈 Обязательный параметр для запуска
+  scriptPath: .next/standalone
+  command: PORT=80
   containerPort: 80
-  servicePort: 80
