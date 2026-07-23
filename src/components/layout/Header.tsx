@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-import { Icon } from '@/components/brand/Icon';
-import { LogoMark } from '@/components/brand/LogoMark';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Icon } from '@brand/Icon';
+import { LogoMark } from '@brand/LogoMark';
+import { Button } from '@base/button';
+import { Separator } from '@base/separator';
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@base/sheet';
 
 const NAV = [
   { href: '#destinations', label: 'Направления', num: '01' },
@@ -22,7 +22,7 @@ const SOCIALS: Array<{ key: string; label: string; icon: () => React.ReactElemen
   { key: 'inst', label: 'Instagram', icon: () => <Icon.inst /> },
 ];
 
-export function HeaderSection() {
+export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 

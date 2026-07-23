@@ -2,12 +2,12 @@
 
 import { motion } from 'framer-motion';
 
-import { Icon } from '@/components/brand/Icon';
-import { Photo } from '@/components/brand/Photo';
-import { Reveal } from '@/components/motion/Reveal';
-import { Stagger } from '@/components/motion/Stagger';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Icon } from '@brand/Icon';
+import { Photo } from '@brand/Photo';
+import { Reveal } from '@motion/Reveal';
+import { Stagger } from '@motion/Stagger';
+import { Badge } from '@base/badge';
+import { Button } from '@base/button';
 import { EASE_OUT_QUINT, viewportOnce } from '@/lib/motion';
 
 type Destination = {
@@ -56,7 +56,7 @@ const DESTINATIONS: Destination[] = [
 
 export function DestinationsSection() {
   return (
-    <section id="destinations" className="bg-bg-1 px-5 py-20 md:px-16 md:pt-40 md:pb-35">
+    <section id="destinations" className="bg-bg-1 px-5 py-20 md:px-16 md:pt-20 md:pb-35">
       <div className="mx-auto w-full max-w-360">
         <Reveal
           className="reveal-in mb-12 flex flex-col gap-8 md:mb-20 md:flex-row md:items-end md:justify-between md:gap-12"

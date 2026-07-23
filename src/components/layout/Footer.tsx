@@ -1,7 +1,7 @@
-import { Icon } from '@/components/brand/Icon';
-import { LogoMark } from '@/components/brand/LogoMark';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+import { Icon } from '@brand/Icon';
+import { LogoMark } from '@brand/LogoMark';
+import { Button } from '@base/button';
+import { Separator } from '@base/separator';
 
 type FooterItem = { label: string; href: string };
 type FooterColumn = { title: string; items: FooterItem[] };
@@ -43,7 +43,7 @@ const SOCIALS: Array<{ key: string; label: string; icon: () => React.ReactElemen
   { key: 'inst', label: 'Instagram', icon: () => <Icon.inst /> },
 ];
 
-export function FooterSection() {
+export function Footer() {
   return (
     <footer className="border-hairline bg-bg-0 border-t px-5 pt-16 pb-8 md:px-16 md:pt-20">
       <div className="mx-auto w-full max-w-360">

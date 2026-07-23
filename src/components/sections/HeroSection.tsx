@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { motion, type Variants } from 'framer-motion';
 
-import { Icon } from '@/components/brand/Icon';
-import { Video } from '@/components/brand/Video';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Icon } from '@brand/Icon';
+import { Video } from '@brand/Video';
+import { Badge } from '@base/badge';
+import { Button } from '@base/button';
 import { EASE_OUT_EXPO, EASE_OUT_QUINT } from '@/lib/motion';
 
 const TRUST = [
@@ -86,7 +86,7 @@ export function HeroSection() {
             className="border-hairline-strong px-3.5 py-2 backdrop-blur-md"
             style={{ background: 'oklch(0 0 0 / 0.35)' }}
           >
-            <span className="live-dot mr-1" /> FHD · LOOP · {formatClock(remaining)}
+            <span className="live-dot mr-1 animate-pulse" /> FHD · LOOP · {formatClock(remaining)}
           </Badge>
         </motion.div>
 

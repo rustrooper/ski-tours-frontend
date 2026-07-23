@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { Icon } from '@/components/brand/Icon';
-import { Photo } from '@/components/brand/Photo';
-import { Stagger, StaggerItem } from '@/components/motion/Stagger';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Icon } from '@brand/Icon';
+import { Photo } from '@brand/Photo';
+import { Stagger, StaggerItem } from '@motion/Stagger';
+import { Button } from '@base/button';
+import { Input } from '@base/input';
 import { EASE_OUT_QUINT } from '@/lib/motion';
 import { extractDigits, formatPhone, isValidPhone } from '@/lib/phone';
 

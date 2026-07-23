@@ -4,18 +4,13 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Autoplay from 'embla-carousel-autoplay';
 
-import { Icon } from '@/components/brand/Icon';
-import { Reveal } from '@/components/motion/Reveal';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import {
-  Carousel,
-  type CarouselApi,
-  CarouselContent,
-  CarouselItem,
-} from '@/components/ui/carousel';
+import { Icon } from '@brand/Icon';
+import { Reveal } from '@motion/Reveal';
+import { Avatar, AvatarFallback } from '@base/avatar';
+import { Badge } from '@base/badge';
+import { Button } from '@base/button';
+import { Card, CardContent, CardHeader } from '@base/card';
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@base/carousel';
 import { EASE_OUT_QUINT, viewportOnce } from '@/lib/motion';
 
 type Review = {
@@ -120,6 +115,7 @@ export function ReviewsSection() {
               size="icon-pill"
               aria-label="Назад"
               onClick={() => api?.scrollPrev()}
+              className="hidden md:inline-flex"
             >
               <Icon.chevL />
             </Button>
@@ -128,6 +124,7 @@ export function ReviewsSection() {
               size="icon-pill"
               aria-label="Вперёд"
               onClick={() => api?.scrollNext()}
+              className="hidden md:inline-flex"
             >
               <Icon.chevR />
             </Button>
@@ -140,7 +137,7 @@ export function ReviewsSection() {
           plugins={[autoplay]}
           className="relative"
         >
-          <CarouselContent className="-ml-5">
+          <CarouselContent className="ml-5">
             {REVIEWS.map((r, i) => (
               <CarouselItem key={r.name} className="basis-full pl-5 md:basis-1/2 xl:basis-1/3">
                 <motion.div
@@ -154,7 +151,7 @@ export function ReviewsSection() {
                   }}
                 >
                   <Card className="border-hairline bg-bg-2 min-h-90 gap-6 rounded-lg p-8 ring-0">
-                    <CardHeader className="flex flex-row items-center justify-between gap-2 p-0">
+                    <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-2 p-0 lg:flex-nowrap">
                       <div className="flex items-center gap-3.5">
                         <Avatar
                           size="lg"

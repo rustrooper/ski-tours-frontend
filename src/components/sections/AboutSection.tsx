@@ -4,18 +4,13 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Fade from 'embla-carousel-fade';
 
-import { Icon } from '@/components/brand/Icon';
-import { Photo } from '@/components/brand/Photo';
-import { Reveal } from '@/components/motion/Reveal';
-import { Stagger, StaggerItem } from '@/components/motion/Stagger';
-import { Button } from '@/components/ui/button';
-import {
-  Carousel,
-  type CarouselApi,
-  CarouselContent,
-  CarouselItem,
-} from '@/components/ui/carousel';
-import { Separator } from '@/components/ui/separator';
+import { Icon } from '@brand/Icon';
+import { Photo } from '@brand/Photo';
+import { Reveal } from '@motion/Reveal';
+import { Stagger, StaggerItem } from '@motion/Stagger';
+import { Button } from '@base/button';
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@base/carousel';
+import { Separator } from '@base/separator';
 import { EASE_OUT_QUINT, viewportOnce } from '@/lib/motion';
 
 const SLIDES = [
