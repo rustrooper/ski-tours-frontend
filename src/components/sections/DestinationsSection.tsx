@@ -6,8 +6,8 @@ import { Icon } from '@brand/Icon';
 import { Photo } from '@brand/Photo';
 import { Reveal } from '@motion/Reveal';
 import { Stagger } from '@motion/Stagger';
-import { Badge } from '@base/badge';
-import { Button } from '@base/button';
+import { Badge } from '@ui/badge';
+import { Button } from '@ui/button';
 import { EASE_OUT_QUINT, viewportOnce } from '@/lib/motion';
 
 type Destination = {

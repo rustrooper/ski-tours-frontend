@@ -5,8 +5,8 @@ import { motion, type Variants } from 'framer-motion';
 
 import { Icon } from '@brand/Icon';
 import { Video } from '@brand/Video';
-import { Badge } from '@base/badge';
-import { Button } from '@base/button';
+import { Badge } from '@ui/badge';
+import { Button } from '@ui/button';
 import { EASE_OUT_EXPO, EASE_OUT_QUINT } from '@/lib/motion';
 
 const TRUST = [

@@ -20,11 +20,11 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@base/*": ["./src/components/baseComponents/*"],
       "@brand/*": ["./src/components/brand/*"],
       "@layout/*": ["./src/components/layout/*"],
       "@motion/*": ["./src/components/motion/*"],
-      "@sections/*": ["./src/components/sections/*"]
+      "@sections/*": ["./src/components/sections/*"],
+      "@ui/*": ["./src/components/ui/*"]
     }
   },
   "include": [

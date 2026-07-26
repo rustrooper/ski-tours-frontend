@@ -8,9 +8,9 @@ import { Icon } from '@brand/Icon';
 import { Photo } from '@brand/Photo';
 import { Reveal } from '@motion/Reveal';
 import { Stagger, StaggerItem } from '@motion/Stagger';
-import { Button } from '@base/button';
-import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@base/carousel';
-import { Separator } from '@base/separator';
+import { Button } from '@ui/button';
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@ui/carousel';
+import { Separator } from '@ui/separator';
 import { EASE_OUT_QUINT, viewportOnce } from '@/lib/motion';
 
 const SLIDES = [

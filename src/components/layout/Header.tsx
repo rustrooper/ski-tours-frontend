@@ -5,9 +5,9 @@ import Link from 'next/link';
 
 import { Icon } from '@brand/Icon';
 import { LogoMark } from '@brand/LogoMark';
-import { Button } from '@base/button';
-import { Separator } from '@base/separator';
-import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@base/sheet';
+import { Button } from '@ui/button';
+import { Separator } from '@ui/separator';
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@ui/sheet';
 
 const NAV = [
   { href: '#destinations', label: 'Направления', num: '01' },

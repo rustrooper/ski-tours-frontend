@@ -6,8 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Icon } from '@brand/Icon';
 import { Photo } from '@brand/Photo';
 import { Stagger, StaggerItem } from '@motion/Stagger';
-import { Button } from '@base/button';
-import { Input } from '@base/input';
+import { Button } from '@ui/button';
+import { Input } from '@ui/input';
 import { EASE_OUT_QUINT } from '@/lib/motion';
 import { extractDigits, formatPhone, isValidPhone } from '@/lib/phone';
 

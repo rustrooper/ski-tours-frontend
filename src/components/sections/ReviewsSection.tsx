@@ -6,11 +6,11 @@ import Autoplay from 'embla-carousel-autoplay';
 
 import { Icon } from '@brand/Icon';
 import { Reveal } from '@motion/Reveal';
-import { Avatar, AvatarFallback } from '@base/avatar';
-import { Badge } from '@base/badge';
-import { Button } from '@base/button';
-import { Card, CardContent, CardHeader } from '@base/card';
-import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@base/carousel';
+import { Avatar, AvatarFallback } from '@ui/avatar';
+import { Badge } from '@ui/badge';
+import { Button } from '@ui/button';
+import { Card, CardContent, CardHeader } from '@ui/card';
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@ui/carousel';
 import { EASE_OUT_QUINT, viewportOnce } from '@/lib/motion';
 
 type Review = {

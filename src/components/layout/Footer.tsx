@@ -1,7 +1,7 @@
 import { Icon } from '@brand/Icon';
 import { LogoMark } from '@brand/LogoMark';
-import { Button } from '@base/button';
-import { Separator } from '@base/separator';
+import { Button } from '@ui/button';
+import { Separator } from '@ui/separator';
 
 type FooterItem = { label: string; href: string };
 type FooterColumn = { title: string; items: FooterItem[] };
