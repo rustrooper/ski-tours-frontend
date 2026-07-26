@@ -2,7 +2,8 @@
 name: commit
 description: Создаёт git-коммит в этом проекте — анализирует изменения, стейджит нужные файлы и пишет сообщение в формате Conventional Commits. Применять, когда просят "закоммить", "сделай коммит", "commit changes", "зафиксируй изменения". Не пушит без явной просьбы.
 user-invocable: true
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(git restore:*), Bash(git branch:*), Bash(git show:*)
+model: sonnet
+allowed-tools: Read, Glob, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(git restore:*), Bash(git branch:*), Bash(git show:*), Bash(git stash list:*), Bash(pnpm typecheck), Bash(pnpm exec lint-staged)
 ---
 
 # Коммит в ski-tours-frontend
