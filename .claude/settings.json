@@ -41,7 +41,6 @@
       "Bash(ssh:*)",
       "Bash(scp:*)",
       "Bash(> /dev:*)",
-      "Bash(git push:*)",
       "Bash(git reset --hard:*)",
       "Bash(chmod 777:*)",
       "Bash(npm publish:*)",
