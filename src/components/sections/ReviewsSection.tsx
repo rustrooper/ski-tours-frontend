@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { m } from 'framer-motion';
+import { m } from 'motion/react';
 import Autoplay from 'embla-carousel-autoplay';
 
 import { Icon } from '@brand/Icon';

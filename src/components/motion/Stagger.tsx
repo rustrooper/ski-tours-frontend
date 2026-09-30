@@ -1,6 +1,6 @@
 'use client';
 
-import { m, type HTMLMotionProps } from 'framer-motion';
+import { m, type HTMLMotionProps } from 'motion/react';
 
 import { EASE_OUT_QUINT, dur, stagger, viewportOnce, viewportOnceLoose } from '@/lib/motion';
 

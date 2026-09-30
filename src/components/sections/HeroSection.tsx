@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { m, type Variants } from 'framer-motion';
+import { m, type Variants } from 'motion/react';
 
 import { Icon } from '@brand/Icon';
 import { Video } from '@brand/Video';
