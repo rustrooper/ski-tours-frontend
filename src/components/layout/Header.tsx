@@ -35,7 +35,6 @@ export function Header() {
 
   return (
     <header
-      data-scrolled={scrolled || undefined}
       className="border-hairline fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ease-out"
       style={{
         background: scrolled ? 'oklch(0.13 0.012 240 / 0.8)' : 'oklch(0.13 0.012 240 / 0.32)',
