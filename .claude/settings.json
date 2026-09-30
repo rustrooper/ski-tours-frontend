@@ -52,5 +52,35 @@
     "ask": ["Bash(git push:*)"]
   },
   "env": {},
-  "includeCoAuthoredBy": false
+  "includeCoAuthoredBy": false,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/protect-files.sh\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Edit(*.ts)|Write(*.ts)",
+            "command": "jq -r '.tool_input.file_path' | xargs npx prettier --write --ignore-unknown"
+          },
+          {
+            "type": "command",
+            "if": "Edit(*.ts)|Write(*.ts)",
+            "command": "npm run lint -- --fix"
+          }
+        ]
+      }
+    ]
+  }
 }
