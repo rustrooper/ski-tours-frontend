@@ -10,16 +10,16 @@
       "mcp__shadcn__get_audit_checklist",
       "mcp__pencil__get_screenshot",
       "mcp__pencil__get_guidelines",
-      "Bash(npm run typecheck)",
-      "Bash(npm run lint)",
+      "Bash(pnpm typecheck)",
+      "Bash(pnpm lint)",
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(npm run test:*)",
-      "Bash(npm run lint:*)",
-      "Bash(npm run build:*)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm build:*)",
       "Bash(ls:*)",
       "Bash(find:*)",
       "Bash(cat:*)",
@@ -63,6 +63,15 @@
             "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/protect-files.sh\""
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/bash-guard.mjs\""
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -71,13 +80,33 @@
         "hooks": [
           {
             "type": "command",
-            "if": "Edit(*.ts)|Write(*.ts)",
-            "command": "jq -r '.tool_input.file_path' | xargs npx prettier --write --ignore-unknown"
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/format.sh\""
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/.claude/hooks/notify.ps1\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/typecheck.mjs\"",
+            "timeout": 120
           },
           {
             "type": "command",
-            "if": "Edit(*.ts)|Write(*.ts)",
-            "command": "npm run lint -- --fix"
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/.claude/hooks/notify.ps1\""
           }
         ]
       }
