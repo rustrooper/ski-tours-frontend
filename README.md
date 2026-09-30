@@ -29,8 +29,38 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Деплой (Docker + VPS)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Push в `main` запускает [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml): образ собирается и публикуется в GHCR, затем на сервере по SSH выполняется `docker compose pull && up -d`. Перед приложением стоит Caddy ([`deploy/`](deploy/)), он автоматически выпускает HTTPS-сертификат.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Локальная проверка образа:
+
+```bash
+docker build -t ski-tours .
+docker run --rm -p 3000:3000 ski-tours
+```
+
+### Разовая настройка сервера (Ubuntu 24.04)
+
+```bash
+# под root
+curl -fsSL https://get.docker.com | sh
+adduser --disabled-password deploy && usermod -aG docker deploy
+ufw allow 22 && ufw allow 80 && ufw allow 443 && ufw enable
+
+# под deploy
+mkdir -p ~/ski-tours ~/.ssh
+echo "SITE_HOST=1-2-3-4.sslip.io" > ~/ski-tours/.env   # IP сервера через дефисы
+```
+
+На своей машине создать ключ для CI: `ssh-keygen -t ed25519 -f ski-tours-ci -N ""`. Содержимое `ski-tours-ci.pub` добавить в `~deploy/.ssh/authorized_keys`.
+
+В GitHub → Settings → Secrets and variables → Actions добавить секреты:
+
+- `VPS_HOST` — IP сервера
+- `VPS_USER` — `deploy`
+- `VPS_SSH_KEY` — содержимое приватного ключа `ski-tours-ci`
+
+После первого успешного build: GitHub → Packages → `ski-tours-frontend` → Package settings → Change visibility → **Public**. Тогда сервер скачивает образ без `docker login`. Затем перезапустить workflow (Actions → Deploy → Run workflow).
+
+Когда появится домен, достаточно направить его A-запись на IP сервера и поменять `SITE_HOST` в `~/ski-tours/.env`.

@@ -1,35 +1,40 @@
 # syntax=docker/dockerfile:1
 
 FROM node:22-alpine AS base
-RUN apk add --no-cache libc6-compat && corepack enable
+RUN corepack enable && corepack prepare pnpm@10.15.0 --activate
 WORKDIR /app
 
 # --- dependencies ---
 FROM base AS deps
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
-RUN corepack prepare pnpm@10.15.0 --activate \
-  && pnpm install --frozen-lockfile
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile
 
 # --- build ---
 FROM base AS builder
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN corepack prepare pnpm@10.15.0 --activate \
-  && NODE_OPTIONS=--max-old-space-size=2048 pnpm run build
+RUN pnpm run build
 
 # --- runtime ---
-FROM base AS runner
+FROM node:22-alpine AS runner
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV HOSTNAME=0.0.0.0
-ENV PORT=80
+ENV PORT=3000
 WORKDIR /app
 
-# standalone server + assets it does not bundle by default
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public ./public
+RUN addgroup -S -g 1001 nodejs && adduser -S -u 1001 -G nodejs nextjs
 
-EXPOSE 80
+# standalone server + assets it does not bundle by default
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+
+USER nextjs
+EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget -qO- http://127.0.0.1:3000/ >/dev/null || exit 1
+
 CMD ["node", "server.js"]

@@ -1,0 +1,15 @@
+node_modules
+.next
+.git
+.github
+.claude
+.husky
+.vscode
+media-src
+docs
+deploy
+*.md
+.env*
+tsconfig.tsbuildinfo
+Dockerfile
+.dockerignore
