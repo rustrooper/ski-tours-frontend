@@ -3,6 +3,7 @@ import { Space_Grotesk, Manrope, JetBrains_Mono } from 'next/font/google';
 
 import { Footer } from '@layout/Footer';
 import { Header } from '@layout/Header';
+import { MotionProvider } from '@motion/MotionProvider';
 
 import './globals.css';
 
@@ -50,9 +51,11 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${manrope.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

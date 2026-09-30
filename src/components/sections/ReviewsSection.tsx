@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Autoplay from 'embla-carousel-autoplay';
 
 import { Icon } from '@brand/Icon';
@@ -140,7 +140,7 @@ export function ReviewsSection() {
           <CarouselContent className="ml-5">
             {REVIEWS.map((r, i) => (
               <CarouselItem key={r.name} className="basis-full pl-5 md:basis-1/2 xl:basis-1/3">
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={viewportOnce}
@@ -174,7 +174,7 @@ export function ReviewsSection() {
                       {r.text}
                     </CardContent>
                   </Card>
-                </motion.div>
+                </m.div>
               </CarouselItem>
             ))}
           </CarouselContent>

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, type HTMLMotionProps } from 'framer-motion';
+import { m, type HTMLMotionProps } from 'framer-motion';
 
 import { EASE_OUT_QUINT, dur, stagger, viewportOnce, viewportOnceLoose } from '@/lib/motion';
 
@@ -18,7 +18,7 @@ export function Stagger({
   ...rest
 }: StaggerProps) {
   return (
-    <motion.div
+    <m.div
       initial="hidden"
       whileInView="visible"
       viewport={loose ? viewportOnceLoose : viewportOnce}
@@ -26,7 +26,7 @@ export function Stagger({
       {...rest}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -42,7 +42,7 @@ export function StaggerItem({
   ...rest
 }: StaggerItemProps) {
   return (
-    <motion.div
+    <m.div
       variants={{
         hidden: { opacity: 0, y },
         visible: {
@@ -54,6 +54,6 @@ export function StaggerItem({
       {...rest}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

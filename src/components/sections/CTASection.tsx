@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 
 import { Icon } from '@brand/Icon';
 import { Photo } from '@brand/Photo';
@@ -72,7 +72,7 @@ export function CTASection() {
 
           <AnimatePresence mode="wait" initial={false}>
             {status === 'success' ? (
-              <motion.div
+              <m.div
                 key="success"
                 className="mt-9 flex w-full max-w-140 flex-col items-center gap-5"
                 initial={{ opacity: 0, y: 12 }}
@@ -86,9 +86,9 @@ export function CTASection() {
                 <Button variant="ghost-pill" size="pill" onClick={handleReset}>
                   Отправить ещё одну заявку
                 </Button>
-              </motion.div>
+              </m.div>
             ) : (
-              <motion.div
+              <m.div
                 key="form"
                 className="flex w-full flex-col items-center"
                 initial={{ opacity: 0, y: 12 }}
@@ -180,7 +180,7 @@ export function CTASection() {
                     </a>
                   </Button>
                 </div>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
         </Stagger>

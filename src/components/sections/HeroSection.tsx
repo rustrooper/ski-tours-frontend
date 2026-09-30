@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, type Variants } from 'framer-motion';
+import { m, type Variants } from 'framer-motion';
 
 import { Icon } from '@brand/Icon';
 import { Video } from '@brand/Video';
@@ -64,7 +64,7 @@ export function HeroSection() {
           }}
           style={{ position: 'absolute', inset: 0 }}
         />
-        <motion.div
+        <m.div
           className="absolute inset-0 z-2"
           style={{
             background:
@@ -75,7 +75,7 @@ export function HeroSection() {
           transition={{ duration: 1.4, ease: EASE_OUT_EXPO }}
         />
 
-        <motion.div
+        <m.div
           className="absolute top-28 right-5 z-5 hidden md:right-16 md:flex"
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -88,11 +88,11 @@ export function HeroSection() {
           >
             <span className="live-dot mr-1 animate-pulse" /> FHD · LOOP · {formatClock(remaining)}
           </Badge>
-        </motion.div>
+        </m.div>
 
         <div className="relative z-4 flex h-full flex-col items-start justify-end px-5 pb-20 md:justify-center md:px-16 md:pt-32 md:pb-16">
           <div className="mb-5 inline-flex items-center gap-2.5 md:mb-7">
-            <motion.span
+            <m.span
               aria-hidden
               initial="hidden"
               animate="visible"
@@ -105,7 +105,7 @@ export function HeroSection() {
                 transformOrigin: 'left center',
               }}
             />
-            <motion.span
+            <m.span
               className="font-mono uppercase"
               style={{
                 fontSize: 11,
@@ -117,12 +117,12 @@ export function HeroSection() {
               transition={{ duration: 0.55, ease: EASE_OUT_QUINT, delay: 0.3 }}
             >
               season 25 / 26 · авторские туры
-            </motion.span>
+            </m.span>
           </div>
 
           <h1 className="st-h1 m-0 max-w-295">
             <span className="line-mask">
-              <motion.span
+              <m.span
                 style={{ display: 'inline-block' }}
                 initial="hidden"
                 animate="visible"
@@ -130,10 +130,10 @@ export function HeroSection() {
                 custom={0}
               >
                 Туда, где живёт
-              </motion.span>
+              </m.span>
             </span>
             <span className="line-mask">
-              <motion.span
+              <m.span
                 style={{ display: 'inline-block' }}
                 initial="hidden"
                 animate="visible"
@@ -141,11 +141,11 @@ export function HeroSection() {
                 custom={1}
               >
                 <span className="text-ice ice-glint font-medium italic">пухляк.</span>
-              </motion.span>
+              </m.span>
             </span>
           </h1>
 
-          <motion.p
+          <m.p
             className="st-lede on-media mt-6 max-w-135 md:mt-8"
             initial="hidden"
             animate="visible"
@@ -153,9 +153,9 @@ export function HeroSection() {
           >
             Авторские горнолыжные туры по России от тех, кто сам катается. Логистика, жильё,
             ски-пассы — на нас. Ваше дело — линия и снег.
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             className="mt-7 flex w-full flex-col items-stretch gap-2.5 md:mt-11 md:w-auto md:flex-row md:items-center md:gap-3"
             initial="hidden"
             animate="visible"
@@ -173,9 +173,9 @@ export function HeroSection() {
                 <Icon.arrowDown />
               </a>
             </Button>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             className="text-fg-2 mt-12 hidden items-center gap-10 text-[13px] md:mt-22 md:flex"
             initial="hidden"
             animate="visible"
@@ -187,7 +187,7 @@ export function HeroSection() {
             }}
           >
             {TRUST.map(([n, l]) => (
-              <motion.div
+              <m.div
                 key={l}
                 className="flex items-baseline gap-2.5"
                 variants={{
@@ -201,9 +201,9 @@ export function HeroSection() {
               >
                 <span className="font-display text-fg-0 text-[28px]">{n}</span>
                 <span>{l}</span>
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

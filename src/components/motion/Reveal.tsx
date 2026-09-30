@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, type HTMLMotionProps } from 'framer-motion';
+import { m, type HTMLMotionProps } from 'framer-motion';
 
 import { EASE_OUT_QUINT, dur, viewportOnce, viewportOnceLoose } from '@/lib/motion';
 
@@ -24,7 +24,7 @@ export function Reveal({
 }: RevealProps) {
   void once;
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={loose ? viewportOnceLoose : viewportOnce}
@@ -32,6 +32,6 @@ export function Reveal({
       {...rest}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

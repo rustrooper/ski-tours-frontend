@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 import { Icon } from '@brand/Icon';
 import { Photo } from '@brand/Photo';
@@ -82,7 +82,7 @@ export function DestinationsSection() {
           loose
         >
           {DESTINATIONS.map((d, i) => (
-            <motion.article
+            <m.article
               key={d.name}
               className="dest-card h-110 md:h-145"
               variants={{
@@ -95,11 +95,11 @@ export function DestinationsSection() {
               }}
             >
               <DestinationCardInner d={d} i={i} />
-            </motion.article>
+            </m.article>
           ))}
         </Stagger>
 
-        <motion.div
+        <m.div
           className="border-hairline-strong mt-8 flex flex-col gap-4 rounded-lg border border-dashed p-7 md:flex-row md:items-center md:justify-between md:px-8"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -122,7 +122,7 @@ export function DestinationsSection() {
             Все направления
             <Icon.arrowUpRight />
           </Button>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

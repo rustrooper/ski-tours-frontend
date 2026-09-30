@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Fade from 'embla-carousel-fade';
 
 import { Icon } from '@brand/Icon';
@@ -183,7 +183,7 @@ export function AboutSection() {
             })}
           </div>
 
-          <motion.div
+          <m.div
             className="mt-10 grid grid-cols-3"
             initial="hidden"
             whileInView="visible"
@@ -195,7 +195,7 @@ export function AboutSection() {
           >
             <Separator className="bg-hairline col-span-3" />
             {STATS.map(([n, l], i) => (
-              <motion.div
+              <m.div
                 key={l}
                 className="py-6"
                 style={{
@@ -213,10 +213,10 @@ export function AboutSection() {
               >
                 <div className="font-display text-fg-0 text-[44px] tracking-[-0.04em]">{n}</div>
                 <div className="text-fg-2 mt-1 text-[13px]">{l}</div>
-              </motion.div>
+              </m.div>
             ))}
             <Separator className="bg-hairline col-span-3" />
-          </motion.div>
+          </m.div>
         </Reveal>
       </div>
     </section>
