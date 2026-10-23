@@ -6,7 +6,8 @@ services:
       - '3000'
 
   caddy:
-    image: caddy:2-alpine
+    # Docker Hub mirror: Docker Hub is unreliable from Russian servers
+    image: mirror.gcr.io/library/caddy:2-alpine
     restart: unless-stopped
     depends_on:
       - web
