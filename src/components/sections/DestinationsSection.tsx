@@ -59,18 +59,20 @@ export function DestinationsSection() {
     <section id="destinations" className="bg-bg-1 px-5 py-20 md:px-16 md:pt-20 md:pb-35">
       <div className="mx-auto w-full max-w-360">
         <Reveal
-          className="reveal-in mb-12 flex flex-col gap-8 md:mb-20 md:flex-row md:items-end md:justify-between md:gap-12"
+          className="mb-12 flex flex-col gap-8 md:mb-20 md:flex-row md:items-end md:justify-between md:gap-12"
           y={20}
         >
           <div>
-            <div className="section-num mb-4 md:mb-6">02 / Направления</div>
-            <h2 className="st-h2 m-0 max-w-220">
+            <div className="text-caption text-fg-3 mb-4 font-mono uppercase md:mb-6">
+              02 / Направления
+            </div>
+            <h2 className="font-display text-h2 m-0 max-w-220">
               Курорты, которые
               <br />
               мы <em className="text-ice font-medium italic">знаем</em> лично.
             </h2>
           </div>
-          <p className="st-lede m-0 max-w-95">
+          <p className="text-lede text-fg-1 m-0 max-w-95">
             Каждое направление — наш базовый лагерь. Мы катаемся там сами и знаем, где лежит самый
             мягкий пухляк, а какой подъёмник простоит весь день.
           </p>
@@ -84,7 +86,7 @@ export function DestinationsSection() {
           {DESTINATIONS.map((d, i) => (
             <m.article
               key={d.name}
-              className="dest-card h-110 md:h-145"
+              className="group border-hairline relative isolate h-110 cursor-pointer overflow-hidden rounded-lg border md:h-145"
               variants={{
                 hidden: { opacity: 0, y: 26 },
                 visible: {
@@ -136,9 +138,10 @@ function DestinationCardInner({ d, i }: { d: Destination; i: number }) {
         alt={d.alt}
         objectPosition={d.pos}
         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        className="absolute inset-0 transition-transform duration-800 ease-[cubic-bezier(0.2,0.7,0.3,1)] group-hover:scale-106 motion-reduce:transition-none"
       />
-      <div className="scrim" />
-      <div className="body">
+      <div className="pointer-events-none absolute inset-0 z-2 bg-linear-to-b from-black/10 via-black/20 via-45% to-black/80 to-95%" />
+      <div className="relative z-3 flex h-full flex-col justify-end gap-2 p-7">
         <div className="absolute top-6 right-6 left-6 z-4 flex items-start justify-between">
           <Badge variant="chip">{d.tag}</Badge>
           <span className="text-fg-1 font-mono text-[11px] opacity-70">0{i + 1}</span>
@@ -147,12 +150,12 @@ function DestinationCardInner({ d, i }: { d: Destination; i: number }) {
         <span className="text-fg-2 font-mono text-[11px] tracking-widest uppercase">
           {d.region}
         </span>
-        <h3 className="font-display m-0 mt-2 mb-3.5 text-[42px] leading-[0.95] tracking-[-0.04em] md:text-[56px]">
+        <h3 className="font-display m-0 mt-2 mb-3.5 text-[42px] leading-[0.95] font-semibold tracking-[-0.04em] md:text-[56px]">
           {d.name}
         </h3>
         <p className="text-fg-1 m-0 max-w-80 text-[15px] leading-normal">{d.desc}</p>
 
-        <div className="reveal mt-5">
+        <div className="mt-5 translate-y-2 opacity-0 transition-[opacity,translate] delay-50 duration-350 ease-[ease] group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:transition-none [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100">
           <div className="mb-5 flex flex-wrap gap-2">
             {d.stats.map((s) => (
               <Badge key={s} variant="chip">

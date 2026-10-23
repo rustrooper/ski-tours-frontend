@@ -54,18 +54,20 @@ export function CTASection() {
           }}
         />
         <Stagger
-          className="reveal-in relative z-2 flex h-full flex-col items-center justify-center px-5 text-center md:px-16"
+          className="relative z-2 flex h-full flex-col items-center justify-center px-5 text-center md:px-16"
           childrenDelay={0.08}
           loose
         >
           <StaggerItem>
-            <div className="st-eyebrow mb-6 md:mb-7">04 / подбор</div>
+            <div className="text-caption text-ice-2 before:bg-ice-2 mb-6 inline-flex items-center gap-2.5 font-mono uppercase before:h-px before:w-6 md:mb-7">
+              04 / подбор
+            </div>
           </StaggerItem>
           <StaggerItem y={22}>
-            <h2 className="st-h2 m-0 max-w-225">Подобрать тур.</h2>
+            <h2 className="font-display text-h2 m-0 max-w-225">Подобрать тур.</h2>
           </StaggerItem>
           <StaggerItem>
-            <p className="st-lede mt-6 max-w-135">
+            <p className="text-lede text-fg-1 mt-6 max-w-135">
               Оставьте номер телефона — менеджер расскажет подробнее о предстоящем путешествии.
             </p>
           </StaggerItem>

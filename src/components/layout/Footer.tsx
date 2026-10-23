@@ -71,7 +71,7 @@ export function Footer() {
 
           {COLUMNS.map((col) => (
             <div key={col.title}>
-              <div className="section-num mb-4">{col.title}</div>
+              <div className="text-caption text-fg-3 mb-4 font-mono uppercase">{col.title}</div>
               <ul className="m-0 flex list-none flex-col gap-3 p-0">
                 {col.items.map((it) => (
                   <li key={it.label}>

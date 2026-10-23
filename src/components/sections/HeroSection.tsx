@@ -86,7 +86,8 @@ export function HeroSection() {
             className="border-hairline-strong px-3.5 py-2 backdrop-blur-md"
             style={{ background: 'oklch(0 0 0 / 0.35)' }}
           >
-            <span className="live-dot mr-1 animate-pulse" /> FHD · LOOP · {formatClock(remaining)}
+            <span className="bg-live ring-live/18 mr-1 inline-block size-1.5 animate-pulse rounded-full ring-4 motion-reduce:animate-none" />{' '}
+            FHD · LOOP · {formatClock(remaining)}
           </Badge>
         </m.div>
 
@@ -97,21 +98,10 @@ export function HeroSection() {
               initial="hidden"
               animate="visible"
               variants={barDraw}
-              style={{
-                display: 'inline-block',
-                width: 24,
-                height: 1,
-                background: 'var(--color-ice-2)',
-                transformOrigin: 'left center',
-              }}
+              className="bg-ice-2 inline-block h-px w-6 origin-left"
             />
             <m.span
-              className="font-mono uppercase"
-              style={{
-                fontSize: 11,
-                letterSpacing: '0.18em',
-                color: 'var(--color-ice-2)',
-              }}
+              className="text-caption text-ice-2 font-mono uppercase"
               initial={{ opacity: 0, x: -6 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.55, ease: EASE_OUT_QUINT, delay: 0.3 }}
@@ -120,8 +110,8 @@ export function HeroSection() {
             </m.span>
           </div>
 
-          <h1 className="st-h1 m-0 max-w-295">
-            <span className="line-mask">
+          <h1 className="font-display text-h1 m-0 max-w-295">
+            <span className="block overflow-hidden pb-[0.12em]">
               <m.span
                 style={{ display: 'inline-block' }}
                 initial="hidden"
@@ -132,7 +122,7 @@ export function HeroSection() {
                 Туда, где живёт
               </m.span>
             </span>
-            <span className="line-mask">
+            <span className="block overflow-hidden pb-[0.12em]">
               <m.span
                 style={{ display: 'inline-block' }}
                 initial="hidden"
@@ -146,7 +136,7 @@ export function HeroSection() {
           </h1>
 
           <m.p
-            className="st-lede on-media mt-6 max-w-135 md:mt-8"
+            className="text-lede text-fg-0 mt-6 max-w-135 text-shadow-[0_1px_2px_oklch(0_0_0/0.4)] md:mt-8"
             initial="hidden"
             animate="visible"
             variants={fadeUp(0.95)}
@@ -199,7 +189,9 @@ export function HeroSection() {
                   },
                 }}
               >
-                <span className="font-display text-fg-0 text-[28px]">{n}</span>
+                <span className="font-display text-fg-0 text-[28px] font-semibold tracking-[-0.035em]">
+                  {n}
+                </span>
                 <span>{l}</span>
               </m.div>
             ))}

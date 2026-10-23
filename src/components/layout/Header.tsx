@@ -90,7 +90,9 @@ export function Header() {
                     className="border-hairline text-fg-0 flex items-baseline gap-5 border-b py-6"
                   >
                     <span className="text-fg-2 font-mono text-[11px] tracking-widest">{num}</span>
-                    <span className="font-display text-[32px] tracking-[-0.03em]">{label}</span>
+                    <span className="font-display text-[32px] font-semibold tracking-[-0.03em]">
+                      {label}
+                    </span>
                   </a>
                 </SheetClose>
               ))}
@@ -101,7 +103,7 @@ export function Header() {
                 >
                   <div className="flex items-baseline gap-5">
                     <span className="text-fg-2 font-mono text-[11px] tracking-widest">04</span>
-                    <span className="font-display text-[32px] tracking-[-0.03em]">
+                    <span className="font-display text-[32px] font-semibold tracking-[-0.03em]">
                       Подобрать тур
                     </span>
                   </div>

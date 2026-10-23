@@ -61,10 +61,12 @@ export function AboutSection() {
       <div className="mx-auto grid w-full max-w-360 grid-cols-1 items-start gap-12 md:grid-cols-[1fr_1.05fr] md:gap-24">
         <Stagger className="md:sticky md:top-30" childrenDelay={0.07} loose>
           <StaggerItem>
-            <div className="section-num mb-4 block md:mb-6">01 / О нас</div>
+            <div className="text-caption text-fg-3 mb-4 block font-mono uppercase md:mb-6">
+              01 / О нас
+            </div>
           </StaggerItem>
           <StaggerItem y={22}>
-            <h2 className="st-h2 m-0 mb-8 max-w-135 md:mb-9">
+            <h2 className="font-display text-h2 m-0 mb-8 max-w-135 md:mb-9">
               Россия — рай
               <br />
               для райдера.
@@ -73,7 +75,7 @@ export function AboutSection() {
 
           <div className="flex max-w-120 flex-col gap-7">
             <StaggerItem>
-              <p className="st-body">
+              <p className="text-body text-fg-1">
                 Найти идеальный склон, мягкий пухляк и работающий подъёмник без «сюрпризов» может
                 только местный эксперт. Мы стали теми, кто закрыл вопрос «куда поехать» для сотен
                 райдеров.
@@ -82,8 +84,8 @@ export function AboutSection() {
 
             <StaggerItem>
               <div>
-                <h4 className="st-h4 text-ice m-0 mb-2.5">Мы — не агрегатор.</h4>
-                <p className="st-body">
+                <h4 className="font-display text-h4 text-ice m-0 mb-2.5">Мы — не агрегатор.</h4>
+                <p className="text-body text-fg-1">
                   Мы команда фанатов, которые живут горами. Лично объездили все популярные и дикие
                   курорты от Кольского до Камчатки. Отбираем только лучшее: трассы, жильё в шаговой
                   доступности от подъёмника, никакого скрытого подвоха.
@@ -93,8 +95,8 @@ export function AboutSection() {
 
             <StaggerItem>
               <div>
-                <h4 className="st-h4 m-0 mb-2.5">Философия — просто катайся.</h4>
-                <p className="st-body">
+                <h4 className="font-display text-h4 m-0 mb-2.5">Философия — просто катайся.</h4>
+                <p className="text-body text-fg-1">
                   Всю логистику — трансферы, проживание, ски-пассы, и даже компанию для катания — мы
                   берём на себя.
                 </p>
@@ -127,7 +129,9 @@ export function AboutSection() {
                 >
                   <figure className="absolute inset-0 m-0">
                     <Photo src={s.src} alt={s.label} style={{ position: 'absolute', inset: 0 }} />
-                    <figcaption className="photo-label">{s.label}</figcaption>
+                    <figcaption className="absolute bottom-3 left-3.5 z-3 rounded-[4px] border border-white/10 bg-black/25 px-2 py-1 font-mono text-[10px] tracking-[0.08em] text-white/55 uppercase backdrop-blur-xs">
+                      {s.label}
+                    </figcaption>
                   </figure>
                 </CarouselItem>
               ))}
@@ -211,7 +215,9 @@ export function AboutSection() {
                   },
                 }}
               >
-                <div className="font-display text-fg-0 text-[44px] tracking-[-0.04em]">{n}</div>
+                <div className="font-display text-fg-0 text-[44px] font-semibold tracking-[-0.04em]">
+                  {n}
+                </div>
                 <div className="text-fg-2 mt-1 text-[13px]">{l}</div>
               </m.div>
             ))}

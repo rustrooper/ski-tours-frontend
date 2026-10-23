@@ -12,6 +12,7 @@ import { Button } from '@ui/button';
 import { Card, CardContent, CardHeader } from '@ui/card';
 import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@ui/carousel';
 import { EASE_OUT_QUINT, viewportOnce } from '@/lib/motion';
+import { cn } from '@/lib/utils';
 
 type Review = {
   name: string;
@@ -101,8 +102,10 @@ export function ReviewsSection() {
           y={20}
         >
           <div>
-            <div className="section-num mb-4 block md:mb-6">03 / Отзывы</div>
-            <h2 className="st-h2 m-0 max-w-175">
+            <div className="text-caption text-fg-3 mb-4 block font-mono uppercase md:mb-6">
+              03 / Отзывы
+            </div>
+            <h2 className="font-display text-h2 m-0 max-w-175">
               Что говорят те, кто
               <br />
               уже съездил.
@@ -181,7 +184,7 @@ export function ReviewsSection() {
         </Carousel>
 
         <div className="mt-12 flex justify-center">
-          <div className="dots">
+          <div className="inline-flex items-center gap-1.5">
             {REVIEWS.map((_, i) => (
               <button
                 key={i}
@@ -189,7 +192,10 @@ export function ReviewsSection() {
                 aria-label={`Отзыв ${i + 1}`}
                 aria-current={i === current ? 'true' : undefined}
                 onClick={() => api?.scrollTo(i)}
-                className={`d ${i === current ? 'on' : ''} cursor-pointer border-0 p-0`}
+                className={cn(
+                  'focus-visible:outline-ice h-1.5 w-1.5 cursor-pointer rounded-full border-0 bg-white/18 p-0 transition-[width,background-color] duration-250 focus-visible:outline-2 focus-visible:outline-offset-3 motion-reduce:transition-none',
+                  i === current && 'bg-ice w-5',
+                )}
               />
             ))}
           </div>

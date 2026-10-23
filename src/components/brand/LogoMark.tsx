@@ -10,7 +10,10 @@ export function LogoMark({
   accent = 'var(--color-ice)',
 }: Props) {
   return (
-    <span className="logo-mark" style={{ fontSize: size, color }}>
+    <span
+      className="font-display inline-flex items-center gap-2.25 font-semibold tracking-tight"
+      style={{ fontSize: size, color }}
+    >
       <svg width={size + 4} height={size + 2} viewBox="0 0 24 22" fill="none" aria-hidden>
         <path
           d="M2 20 L9 6 L13 14 L16 10 L22 20 Z"
